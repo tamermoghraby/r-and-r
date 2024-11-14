@@ -67,7 +67,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="relative flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1/80">
+    <main className="relative flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1/80 overflow-x-hidden">
       <Image
         width={500}
         height={500}
@@ -78,7 +78,7 @@ export default function Home() {
         <p className="text-primary  tracking-widest text-4xl font-rubik mb-8">
           KAAKE
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 gap-8">
           {kaakeItems.map((item) => (
             <MenuItem
               key={item.name}
@@ -92,7 +92,7 @@ export default function Home() {
         <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-8 ">
           WRAPS
         </p>
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-3">
+        <div className="grid grid-cols-2 gap-8">
           {wrapItems.map((item) => (
             <MenuItem
               key={item.name}

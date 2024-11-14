@@ -5,7 +5,7 @@ const MenuItem = ({ name, price, description, image }) => {
   return (
     <div
       className="overflow-hidden bg-gradient-to-br from-menuTop to-menuBottom rounded-xl
-     shadow-md shadow-primary/50"
+     shadow-md shadow-primary/50 text-white"
     >
       <Image
         width={500}
@@ -14,7 +14,7 @@ const MenuItem = ({ name, price, description, image }) => {
         src={image}
       />
       <div className="pb-2">
-        <p className="mt-2 px-2 tracking-widest">{name}</p>
+        <p className="mt-2 px-2 tracking-widest font-bold">{name}</p>
         {price && (
           <p className="mt-2 px-2 tracking-widest text-lg font-semibold">
             {price} LL
