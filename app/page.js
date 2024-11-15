@@ -97,7 +97,7 @@ export default function Home() {
         className="w-full"
       />
       <div className="py-8 px-4 mb-16">
-        <p className="text-primary  tracking-widest text-4xl font-rubik mb-8">
+        <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
           KAAKE
         </p>
         <div className="grid grid-cols-2 gap-4">
@@ -111,7 +111,7 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-8 ">
+        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
           WRAPS
         </p>
         <div className="grid grid-cols-2 gap-4">
@@ -125,7 +125,7 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-8">
+        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
           APPETIZERS
         </p>
         <div className="grid grid-cols-2 gap-4">
@@ -139,7 +139,7 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-8">
+        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
           SOFT DRINKS
         </p>
         <div className="grid grid-cols-2 gap-4">
