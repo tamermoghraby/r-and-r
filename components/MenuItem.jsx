@@ -10,17 +10,15 @@ const MenuItem = ({ name, price, description, image }) => {
       <Image
         width={500}
         height={500}
-        className="w-full h-40 object-cover object-center"
+        className="w-full h-40 object-cover object-center rounded-b-xl"
         src={image}
       />
-      <div className="pb-2">
-        <p className="mt-2 px-2 tracking-widest font-bold">{name}</p>
+      <div className="pb-2 rounded-t-xl pt-2 px-2">
+        <p className="tracking-widest text-sm uppercase">{name}</p>
         {price && (
-          <p className="mt-2 px-2 tracking-widest text-lg font-semibold">
-            {price} LL
-          </p>
+          <p className=" tracking-widest text-xl font-bold mt-2">{price} LL</p>
         )}
-        <p className="mt-2 px-2 text-xs">{description}</p>
+        <p className="mt-2 font-light text-xs text-gray-300">{description}</p>
       </div>
     </div>
   );
