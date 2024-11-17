@@ -187,7 +187,10 @@ export default function Home() {
         </div>
       </div>
       <Link
-        href={"https://wa.me/70381621"}
+        href={
+          "https://wa.me/70381621?text=" +
+          encodeURIComponent("Hello, can i place an order?")
+        }
         target="_blank"
         className="bg-gradient-to-br from-primary via-primary to-orange-700 font-bold p-4 rounded-xl fixed bottom-4 left-4 right-4 shadow-md shadow-primary/60 text-center text-white tracking-widest"
       >
