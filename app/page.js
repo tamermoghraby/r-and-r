@@ -1,4 +1,5 @@
 import MenuItem from "@/components/MenuItem";
+import MotionDiv from "@/components/MotionDiv";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,7 +14,7 @@ export default function Home() {
     {
       name: "Pepperoni & Cheese",
       price: "250,000",
-      description: "Ketshup, Oregano, Mozzarella, Peperoni",
+      description: "Ketchup, Oregano, Mozzarella, Pepperoni",
       image: "/assets/images/pepperoni.jpg",
     },
     {
@@ -21,6 +22,12 @@ export default function Home() {
       price: "250,000",
       description: "Mortadella, Mozzarella, Mustard, Oregano, Olives",
       image: "/assets/images/telyeni.jpg",
+    },
+    {
+      name: "Turkey & Cheese",
+      price: "300,000",
+      description: "Turkey, Mozzarella, Honey Mustard, Mayo, Corn, Iceberg",
+      image: "/assets/images/turkey.jpg",
     },
     {
       name: "Nutella & Cheese",
@@ -41,19 +48,19 @@ export default function Home() {
       name: "Boneless Wrap",
       price: "400,000",
       description:
-        "Tortilla wrap, Iceberg, Sticks, Honey mustard, Barbecue. Cheddar cheese, Mozzarella",
+        "Tortilla Wrap, Mozzarella, Iceberg, Sticks, Honey Mustard, Barbecue, Ranch Sauce, Cheddar Cheese",
       image: "/assets/images/boneless.jpg",
     },
     {
       name: "Pepperoni Pizza Wrap",
       price: "350,000",
-      description: "Tortilla wrap, Pepperoni, Mozzarella, Oregano, Ketchup",
+      description: "Tortilla Wrap, Pepperoni, Mozzarella, Oregano, Ketchup",
       image: "/assets/images/pizza-wrap.jpg",
     },
     {
       name: "Nutella & Cheese Wrap",
       price: "350,000",
-      description: "Tortilla wrap, Nutella, Mozzarella, Topped with banana",
+      description: "Tortilla Wrap, Nutella, Mozzarella, Topped with Banana",
       image: "/assets/images/nutella-wrap.jpg",
     },
   ];
@@ -68,35 +75,40 @@ export default function Home() {
     {
       name: "Wedges",
       price: "200,000",
-      description: "Potato wedges + cocktail sauce",
+      description: "Wedges + Cocktail Sauce",
       image: "/assets/images/wedges.jpg",
     },
     {
       name: "Mozzarella Sticks",
       price: "350,000",
-      description: "6 pieces + cocktail sauce",
+      description: "6 Pieces + Cocktail Sauce",
       image: "/assets/images/mozzarella-sticks.jpg",
     },
     {
       name: "Jalopeno Bites",
       price: "350,000",
-      description: "6 pieces + cocktail sauce",
+      description: "6 Pieces + Cocktail Sauce",
       image: "/assets/images/jalopeno-bites.jpg",
     },
     {
       name: "Loaded Fries",
       price: "400,000",
       description:
-        "Fries, Crispy, Barbecue sauce, Ranch sauce, Honey mustard, Cheddar cheese",
+        "Fries, Chicken Strips, Barbecue Sauce, Ranch Sauce, Honey Mustard, Cheddar Cheese",
       image: "/assets/images/loaded-fries.jpg",
     },
   ];
 
-  const softDrinks = [
+  const coldBeverages = [
     {
-      name: "Soft Drink",
+      name: "Soft Drinks",
       price: "60,000",
       image: "/assets/images/soft-drinks.jpg",
+    },
+    {
+      name: "Small Water",
+      price: "25,000",
+      image: "/assets/images/water.jpg",
     },
   ];
 
@@ -109,9 +121,11 @@ export default function Home() {
         className="w-full"
       />
       <div className="py-8 px-4 mb-16">
-        <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
-          KAAKE
-        </p>
+        <MotionDiv>
+          <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
+            KAAKE
+          </p>
+        </MotionDiv>
         <div className="grid grid-cols-2 gap-4">
           {kaakeItems.map((item) => (
             <MenuItem
@@ -123,9 +137,11 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
-          WRAPS
-        </p>
+        <MotionDiv>
+          <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
+            WRAPS
+          </p>
+        </MotionDiv>
         <div className="grid grid-cols-2 gap-4">
           {wrapItems.map((item) => (
             <MenuItem
@@ -137,9 +153,11 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
-          APPETIZERS
-        </p>
+        <MotionDiv>
+          <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
+            APPETIZERS
+          </p>
+        </MotionDiv>
         <div className="grid grid-cols-2 gap-4">
           {appetizers.map((item) => (
             <MenuItem
@@ -151,11 +169,13 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
-          SOFT DRINKS
-        </p>
+        <MotionDiv>
+          <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
+            COLD BEVERAGES
+          </p>
+        </MotionDiv>
         <div className="grid grid-cols-2 gap-4">
-          {softDrinks.map((item) => (
+          {coldBeverages.map((item) => (
             <MenuItem
               key={item.name}
               name={item.name}
