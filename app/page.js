@@ -47,8 +47,14 @@ export default function Home() {
     {
       name: "Pepperoni Pizza Wrap",
       price: "350,000",
-      description: "Pepperoni, Mozzarella, Oregano, Ketchup",
+      description: "Tortilla wrap, Pepperoni, Mozzarella, Oregano, Ketchup",
       image: "/assets/images/pizza-wrap.jpg",
+    },
+    {
+      name: "Nutella & Cheese Wrap",
+      price: "350,000",
+      description: "Tortilla wrap, Nutella, Mozzarella, Topped with banana",
+      image: "/assets/images/nutella-wrap.jpg",
     },
   ];
 
@@ -56,20 +62,26 @@ export default function Home() {
     {
       name: "Fries",
       price: "150,000",
-      description: "Fries",
+      description: "Fries + Ketchup",
       image: "/assets/images/fries.jpg",
     },
     {
       name: "Wedges",
       price: "200,000",
-      description: "Wedges",
+      description: "Potato wedges + cocktail sauce",
       image: "/assets/images/wedges.jpg",
     },
     {
-      name: "Jalapeno Bites",
+      name: "Mozzarella Sticks",
       price: "350,000",
-      description: "",
+      description: "6 pieces + cocktail sauce",
       image: "/assets/images/mozzarella-sticks.jpg",
+    },
+    {
+      name: "Jalopeno Bites",
+      price: "350,000",
+      description: "6 pieces + cocktail sauce",
+      image: "/assets/images/jalopeno-bites.jpg",
     },
     {
       name: "Loaded Fries",
