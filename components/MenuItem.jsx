@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 const MenuItem = ({ name, price, description, image }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1 }}
+      initial={{ opacity: 0, x: -20, scale: 0.8 }}
+      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
       // viewport={{ once: true }}
       className="overflow-hidden bg-gradient-to-br from-menuTop to-menuBottom rounded-xl
      shadow-md shadow-primary/50 text-white"

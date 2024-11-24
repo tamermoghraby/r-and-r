@@ -2,6 +2,7 @@ import MenuItem from "@/components/MenuItem";
 import MotionDiv from "@/components/MotionDiv";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
   const kaakeItems = [
