@@ -23,6 +23,7 @@ module.exports = {
       },
       fontFamily: {
         rubik: ["var(--font-rubik)"],
+        rubikPuddles: ["var(--font-rubikpuddles"],
       },
     },
   },

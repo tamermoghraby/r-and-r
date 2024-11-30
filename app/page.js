@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import MenuItem from "@/components/MenuItem";
 import MotionDiv from "@/components/MotionDiv";
 import Image from "next/image";
@@ -114,20 +115,24 @@ export default function Home() {
   ];
 
   return (
-    <main className="relative flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1/80 overflow-x-hidden">
-      <Image
-        width={500}
-        height={500}
-        src={"/assets/images/logo.PNG"}
-        className="w-full"
-      />
-      <div className="py-8 px-4 mb-16">
+    <main className="flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1 overflow-x-hidden">
+      <div className="relative h-fit">
+        <Image
+          width={500}
+          height={500}
+          src={"/assets/images/logo.PNG"}
+          className="w-full md:h-96"
+        />
+        <div className="h-[50%] bg-gradient-to-b from-transparent  to-bg1 absolute -bottom-[2px] left-0 right-0" />
+      </div>
+
+      <div className="py-8 px-4">
         <MotionDiv>
           <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
             KAAKE
           </p>
         </MotionDiv>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {kaakeItems.map((item) => (
             <MenuItem
               key={item.name}
@@ -143,7 +148,7 @@ export default function Home() {
             WRAPS
           </p>
         </MotionDiv>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {wrapItems.map((item) => (
             <MenuItem
               key={item.name}
@@ -159,7 +164,7 @@ export default function Home() {
             APPETIZERS
           </p>
         </MotionDiv>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {appetizers.map((item) => (
             <MenuItem
               key={item.name}
@@ -175,7 +180,7 @@ export default function Home() {
             COLD BEVERAGES
           </p>
         </MotionDiv>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {coldBeverages.map((item) => (
             <MenuItem
               key={item.name}
@@ -187,6 +192,8 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <Footer />
+
       <Link
         href={
           "https://wa.me/70381621?text=" +
