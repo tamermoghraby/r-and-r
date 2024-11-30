@@ -21,7 +21,7 @@ const Footer = () => {
             href={"https://www.instagram.com/r.and.r.snack"}
             target={"_blank"}
           >
-            <FaInstagram className="text-4xl" />
+            <FaInstagram className="text-4xl text-white" />
           </Link>
         </motion.div>
         <motion.div
@@ -34,7 +34,7 @@ const Footer = () => {
             href={"https://www.tiktok.com/@r.and.r.snack"}
             target={"_blank"}
           >
-            <FaTiktok className="text-3xl" />
+            <FaTiktok className="text-3xl text-white" />
           </Link>
         </motion.div>
       </div>
