@@ -82,7 +82,7 @@ export default function Home() {
     },
     {
       name: "Mozzarella Sticks",
-      price: "350,000",
+      price: "250,000",
       description: "6 Pieces + Cocktail Sauce",
       image: "/assets/images/mozzarella-sticks.jpg",
     },
