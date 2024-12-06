@@ -39,7 +39,7 @@ export default function Home() {
     },
     {
       name: "Cheese Namoura",
-      price: "270,000",
+      price: "280,000",
       description: "Mozzarella, Namoura",
       image: "/assets/images/cheese-namoura.jpg",
     },
@@ -82,13 +82,13 @@ export default function Home() {
     },
     {
       name: "Mozzarella Sticks",
-      price: "250,000",
+      price: "280,000",
       description: "6 Pieces + Cocktail Sauce",
       image: "/assets/images/mozzarella-sticks.jpg",
     },
     {
       name: "Jalopeno Bites",
-      price: "350,000",
+      price: "300,000",
       description: "6 Pieces + Cocktail Sauce",
       image: "/assets/images/jalopeno-bites.jpg",
     },
