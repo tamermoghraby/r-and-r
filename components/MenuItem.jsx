@@ -21,7 +21,7 @@ const MenuItem = ({ name, price, description, image }) => {
           src={image}
         />
         <div className="h-[20%] absolute -bottom-[2px] right-0 left-0 bg-gradient-to-b from-transparent via-white/90 to-white">
-          <p className="text-center text-black font-semibold mt-4 tracking-wider text-md uppercase ">
+          <p className="text-center text-red-600 font-semibold mt-4 tracking-wider text-md uppercase ">
             {name}
           </p>
         </div>
@@ -29,7 +29,7 @@ const MenuItem = ({ name, price, description, image }) => {
       <div className="pb-2 rounded-t-xl pt-4 px-2">
         {/* <p className="tracking-widest text-sm uppercase min-h-10">{name}</p> */}
         {price && (
-          <p className=" tracking-widest text-xl font-bold mt-6 text-red-600">
+          <p className=" tracking-widest text-xl font-bold mt-6 text-black">
             {price} LL
           </p>
         )}

@@ -15,6 +15,7 @@ import {
 } from "react-icons/tb";
 import { GiColdHeart, GiWinterGloves, GiWinterHat } from "react-icons/gi";
 import { motion } from "framer-motion";
+import snowFlake1 from "../public/assets/images/snow64.png";
 
 export default function Home() {
   const kaakeItems = [
@@ -154,28 +155,6 @@ export default function Home() {
           particlesLoaded={particlesLoaded}
           options={{
             fpsLimit: 120,
-            // interactivity: {
-            //   events: {
-            //     onClick: {
-            //       enable: true,
-            //       mode: "push",
-            //     },
-            //     onHover: {
-            //       enable: true,
-            //       mode: "repulse",
-            //     },
-            //     resize: true,
-            //   },
-            //   modes: {
-            //     push: {
-            //       quantity: 4,
-            //     },
-            //     repulse: {
-            //       distance: 200,
-            //       duration: 0.4,
-            //     },
-            //   },
-            // },
             particles: {
               color: {
                 value: "#ffffff",
@@ -217,18 +196,14 @@ export default function Home() {
       </div>
 
       <div className="py-8 px-4">
-        <motion.div
-          initial={{ opacity: 0, x: -20, scale: 0.8 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <MotionDiv>
           <div className="flex items-center justify-between mb-4">
             <p className="text-white  tracking-widest text-4xl font-rubik">
               KAAKE
             </p>
             <FaRegSnowflake className="text-white text-2xl animate-spin-slow" />
           </div>
-        </motion.div>
+        </MotionDiv>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {kaakeItems.map((item) => (
             <MenuItem
@@ -246,11 +221,11 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="flex justify-evenly mt-16">
-            <GiWinterGloves className="text-2xl self-center" />
+            <GiWinterGloves className="text-2xl self-center text-white" />
             <TbChristmasBall className="text-3xl text-green-500 font-bold" />
             <FaTree className="text-8xl text-white" />
             <GiWinterHat className="text-3xl text-green-500 self-center" />
-            <GiColdHeart className="text-5xl" />
+            <GiColdHeart className="text-5xl text-white" />
           </div>
         </motion.div>
         <MotionDiv>
@@ -278,11 +253,11 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <div className="flex justify-evenly mt-16">
-            <GiWinterGloves className="text-2xl self-center" />
+            <GiWinterGloves className="text-2xl self-center text-white" />
             <FaTree className="text-3xl text-green-500" />
             <TbChristmasBall className="text-8xl text-white font-bold" />
             <GiWinterHat className="text-3xl text-green-500 self-center" />
-            <GiColdHeart className="text-5xl" />
+            <GiColdHeart className="text-5xl text-white" />
           </div>
         </motion.div>
         <MotionDiv>
@@ -326,7 +301,7 @@ export default function Home() {
           encodeURIComponent("Hello, can i place an order?")
         }
         target="_blank"
-        className="bg-red-600 font-bold p-4 rounded-xl fixed bottom-4 left-4 right-4 shadow-md shadow-white/20 border-[1px] border-white text-center text-white tracking-widest"
+        className="bg-white text-red-600 font-bold p-4 rounded-xl fixed bottom-4 left-4 right-4 shadow-md shadow-red-500/50 border-[1px] border-white text-center tracking-widest"
       >
         Order Now
       </Link>
