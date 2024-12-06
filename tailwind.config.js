@@ -25,6 +25,9 @@ module.exports = {
         rubik: ["var(--font-rubik)"],
         rubikPuddles: ["var(--font-rubikpuddles"],
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+      },
     },
   },
   plugins: [],

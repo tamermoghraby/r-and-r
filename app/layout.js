@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 const rubikGemstones = Rubik_Gemstones({
   subsets: ["latin"],
   weight: "400",
-  display: "swap",
+  // display: "swap",
   variable: "--font-rubik",
 });
 
