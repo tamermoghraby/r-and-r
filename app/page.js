@@ -148,7 +148,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col bg-[url(https://media.istockphoto.com/id/1050695960/video/snowing.jpg?s=640x640&k=20&c=asXwRbIJn99TMTcneqjYsGy34Idakk1KFRX71y9Pjos=)] bg-cover bg-center overflow-x-hidden">
+    <main className="flex min-h-screen flex-col bg-[url(https://i.pinimg.com/originals/21/93/da/2193da2c0ea61d7efbc0de5a9d4dfc44.jpg)] bg-cover bg-center overflow-x-hidden">
       {init && (
         <Particles
           id="tsparticles"
