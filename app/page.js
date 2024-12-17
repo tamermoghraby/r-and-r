@@ -32,10 +32,16 @@ export default function Home() {
       image: "/assets/images/pepperoni.jpg",
     },
     {
-      name: "Mortadella & Cheese",
+      name: "Ham & Cheese",
       price: "250,000",
       description: "Mortadella, Mozzarella, Mustard, Oregano, Olives",
       image: "/assets/images/telyeni.jpg",
+    },
+    {
+      name: "Four Cheese",
+      price: "300,000",
+      description: "Mozzarella, Parmesan, Akkawi, Cheddar",
+      image: "/assets/images/four-cheese.jpg",
     },
     {
       name: "Turkey & Cheese",
