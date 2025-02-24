@@ -20,6 +20,13 @@ export default function Home() {
       image: "/assets/images/pepperoni.jpg",
     },
     {
+      name: "Hotdog",
+      price: "300,000",
+      description:
+        "Hotdog, Mozzarella, Ketchup, Mayonnaise, Barbecue, Cheddar, Sticks, Corn",
+      image: "/assets/images/hotdog.jpg",
+    },
+    {
       name: "Ham & Cheese",
       price: "250,000",
       description: "Mortadella, Mozzarella, Mustard, Oregano, Olives",
