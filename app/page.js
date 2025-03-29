@@ -67,6 +67,20 @@ export default function Home() {
       image: "/assets/images/pizza-wrap.jpg",
     },
     {
+      name: "Hotdog Wrap",
+      price: "450,000",
+      description:
+        "Tortilla wrap, Hotdog, Mozzarella, Chips, Ketchup, Mayonnaise, Mustard, Barbecue, Cheddar, Corn",
+      image: "/assets/images/hotdog-wrap.jpg",
+    },
+    {
+      name: "Burger Wrap",
+      price: "400,000",
+      description:
+        "Tortilla Wrap, 2 Burger patty, Fries, Mozzarella, Iceberg, Tomato, Kethup, Cocktail Sauce",
+      image: "/assets/images/burger.jpg",
+    },
+    {
       name: "Nutella & Cheese Wrap",
       price: "350,000",
       description: "Tortilla Wrap, Nutella, Mozzarella, Topped with Banana",
@@ -207,7 +221,7 @@ export default function Home() {
           encodeURIComponent("Hello, can i place an order?")
         }
         target="_blank"
-        className="bg-gradient-to-br from-primary via-primary to-orange-700 font-bold p-4 rounded-xl fixed bottom-4 left-4 right-4 shadow-md shadow-primary/60 text-center text-white tracking-widest"
+        className="bg-gradient-to-br from-primary via-primary to-orange-700 font-bold p-4 rounded-xl fixed bottom-4 left-4 right-4 shadow-md shadow-primary/60 text-center text-white tracking-widest hover:opacity-95"
       >
         Order Now
       </Link>
