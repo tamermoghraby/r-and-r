@@ -15,7 +15,7 @@ export default function Home() {
     },
     {
       name: "Pepperoni & Cheese",
-      price: "250,000",
+      price: "300,000",
       description: "Ketchup, Oregano, Mozzarella, Pepperoni",
       image: "/assets/images/pepperoni.jpg",
     },
@@ -28,8 +28,8 @@ export default function Home() {
     },
     {
       name: "Ham & Cheese",
-      price: "250,000",
-      description: "Mortadella, Mozzarella, Mustard, Oregano, Olives",
+      price: "300,000",
+      description: "Ham, Mozzarella, Mustard, Oregano, Olives",
       image: "/assets/images/telyeni.jpg",
     },
     {
@@ -46,7 +46,7 @@ export default function Home() {
     },
     {
       name: "Cheese Namoura",
-      price: "280,000",
+      price: "250,000",
       description: "Mozzarella, Namoura",
       image: "/assets/images/cheese-namoura.jpg",
     },
@@ -66,16 +66,16 @@ export default function Home() {
       description: "Tortilla Wrap, Pepperoni, Mozzarella, Oregano, Ketchup",
       image: "/assets/images/pizza-wrap.jpg",
     },
-    {
-      name: "Hotdog Wrap",
-      price: "450,000",
-      description:
-        "Tortilla wrap, Hotdog, Mozzarella, Chips, Ketchup, Mayonnaise, Mustard, Barbecue, Cheddar, Corn",
-      image: "/assets/images/hotdog-wrap.jpg",
-    },
+    // {
+    //   name: "Hotdog Wrap",
+    //   price: "450,000",
+    //   description:
+    //     "Tortilla wrap, Hotdog, Mozzarella, Chips, Ketchup, Mayonnaise, Mustard, Barbecue, Cheddar, Corn",
+    //   image: "/assets/images/hotdog-wrap.jpg",
+    // },
     {
       name: "Burger Wrap",
-      price: "400,000",
+      price: "450,000",
       description:
         "Tortilla Wrap, 2 Burger patty, Fries, Mozzarella, Iceberg, Tomato, Kethup, Cocktail Sauce",
       image: "/assets/images/burger.jpg",
@@ -103,7 +103,7 @@ export default function Home() {
     },
     {
       name: "Mozzarella Sticks",
-      price: "280,000",
+      price: "300,000",
       description: "6 Pieces + Cocktail Sauce",
       image: "/assets/images/mozzarella-sticks.jpg",
     },
@@ -125,12 +125,12 @@ export default function Home() {
   const coldBeverages = [
     {
       name: "Soft Drinks",
-      price: "60,000",
+      price: "50,000",
       image: "/assets/images/soft-drinks.jpg",
     },
     {
       name: "Small Water",
-      price: "25,000",
+      price: "20,000",
       image: "/assets/images/water.jpg",
     },
   ];
