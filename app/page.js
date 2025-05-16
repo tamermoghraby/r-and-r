@@ -17,7 +17,7 @@ export default function Home() {
       name: "Pepperoni & Cheese",
       price: "300,000",
       description: "Ketchup, Oregano, Mozzarella, Pepperoni",
-      image: "/assets/images/pepperoni.jpg",
+      image: "/assets/images/pepperoni-new.jpg",
     },
     {
       name: "Hotdog",
@@ -78,7 +78,7 @@ export default function Home() {
       price: "450,000",
       description:
         "Tortilla Wrap, 2 Burger patty, Fries, Mozzarella, Iceberg, Tomato, Kethup, Cocktail Sauce",
-      image: "/assets/images/burger.jpg",
+      image: "/assets/images/burger-new.jpg",
     },
     {
       name: "Nutella & Cheese Wrap",
@@ -99,7 +99,7 @@ export default function Home() {
       name: "Wedges",
       price: "200,000",
       description: "Wedges + Cocktail Sauce",
-      image: "/assets/images/wedges.jpg",
+      image: "/assets/images/wedges-new.jpg",
     },
     {
       name: "Mozzarella Sticks",
@@ -118,7 +118,7 @@ export default function Home() {
       price: "450,000",
       description:
         "Fries, Chicken Strips, Barbecue Sauce, Ranch Sauce, Honey Mustard, Cheddar Cheese",
-      image: "/assets/images/loaded-fries.jpg",
+      image: "/assets/images/loaded-fries-new.jpg",
     },
   ];
 
@@ -149,9 +149,13 @@ export default function Home() {
 
       <div className="py-8 px-4">
         <MotionDiv>
-          <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
-            KAAKE
-          </p>
+          <div className="flex gap-4 justify-between items-center">
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4" />
+            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
+              KAAKE
+            </p>
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4" />
+          </div>
         </MotionDiv>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {kaakeItems.map((item) => (
@@ -165,9 +169,13 @@ export default function Home() {
           ))}
         </div>
         <MotionDiv>
-          <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
-            WRAPS
-          </p>
+          <div className="flex gap-4 justify-between items-center">
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
+              WRAPS
+            </p>
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+          </div>
         </MotionDiv>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {wrapItems.map((item) => (
@@ -181,9 +189,13 @@ export default function Home() {
           ))}
         </div>
         <MotionDiv>
-          <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
-            APPETIZERS
-          </p>
+          <div className="flex gap-4 justify-between items-center">
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
+              APPETIZERS
+            </p>
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+          </div>
         </MotionDiv>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {appetizers.map((item) => (
@@ -197,9 +209,13 @@ export default function Home() {
           ))}
         </div>
         <MotionDiv>
-          <p className="text-primary  tracking-widest text-4xl font-rubik mt-16 mb-4">
-            COLD BEVERAGES
-          </p>
+          <div className="flex gap-4 justify-between items-center">
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
+              COLD BEVERAGES
+            </p>
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+          </div>
         </MotionDiv>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {coldBeverages.map((item) => (

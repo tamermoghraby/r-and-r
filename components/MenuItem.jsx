@@ -19,9 +19,10 @@ const MenuItem = ({ name, price, description, image }) => {
           height={500}
           className="w-full h-40 object-cover object-center rounded-b-xl"
           src={image}
+          alt="menu item"
         />
-        <div className="h-[20%] absolute -bottom-[2px] right-0 left-0 bg-gradient-to-b from-transparent via-menuBottom/90 rounded-t-3xl to-menuBottom">
-          <p className="text-center mt-4 tracking-wider text-md uppercase ">
+        <div className="h-[20%] absolute -bottom-[2px] right-0 left-0 bg-gradient-to-b from-transparent via-menuBottom/90 to-menuBottom">
+          <p className="text-center mt-4 tracking-wider text-md uppercase bg-white text-bg1 font-bold rounded-b-lg">
             {name}
           </p>
         </div>
