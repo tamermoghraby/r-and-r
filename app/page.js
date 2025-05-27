@@ -24,13 +24,19 @@ export default function Home() {
       price: "300,000",
       description:
         "Hotdog, Mozzarella, Ketchup, Mayonnaise, Barbecue, Cheddar, Sticks, Corn",
-      image: "/assets/images/hotdog.jpg",
+      image: "/assets/images/hotdog-new.jpg",
+    },
+    {
+      name: "Sojok",
+      price: "350,000",
+      description: "sojok, Cheese, Tomato, Pickles, Mayonnaise",
+      image: "/assets/images/sujok.jpg",
     },
     {
       name: "Ham & Cheese",
       price: "300,000",
       description: "Ham, Mozzarella, Mustard, Oregano, Olives",
-      image: "/assets/images/telyeni.jpg",
+      image: "/assets/images/ham-and-cheese.jpg",
     },
     {
       name: "Turkey & Cheese",
@@ -42,7 +48,7 @@ export default function Home() {
       name: "Nutella & Cheese",
       price: "250,000",
       description: "Nutella, Mozzarella, Banana, Honey",
-      image: "/assets/images/nutella.jpg",
+      image: "/assets/images/nutella-and-cheese.jpg",
     },
     {
       name: "Cheese Namoura",
@@ -58,13 +64,13 @@ export default function Home() {
       price: "450,000",
       description:
         "Tortilla Wrap, Mozzarella, Iceberg, Sticks, Honey Mustard, Barbecue, Ranch Sauce, Cheddar Cheese",
-      image: "/assets/images/boneless.jpg",
+      image: "/assets/images/boneless-new.jpg",
     },
     {
       name: "Pepperoni Pizza Wrap",
       price: "350,000",
       description: "Tortilla Wrap, Pepperoni, Mozzarella, Oregano, Ketchup",
-      image: "/assets/images/pizza-wrap.jpg",
+      image: "/assets/images/pizza-wrap-new.jpg",
     },
     // {
     //   name: "Hotdog Wrap",
