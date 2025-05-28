@@ -29,7 +29,7 @@ export default function Home() {
     {
       name: "Sojok",
       price: "350,000",
-      description: "sojok, Cheese, Tomato, Pickles, Mayonnaise",
+      description: "Sojok, Cheese, Tomato, Pickles, Mayonnaise",
       image: "/assets/images/sujok.jpg",
     },
     {
