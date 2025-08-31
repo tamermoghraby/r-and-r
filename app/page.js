@@ -81,7 +81,7 @@ export default function Home() {
     // },
     {
       name: "Burger Wrap",
-      price: "450,000",
+      price: "500,000",
       description:
         "Tortilla Wrap, 2 Burger patty, Fries, Mozzarella, Iceberg, Tomato, Kethup, Cocktail Sauce",
       image: "/assets/images/burger-new.jpg",
