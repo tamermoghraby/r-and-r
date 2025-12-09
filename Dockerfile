@@ -13,6 +13,9 @@ RUN npm install
 # Generate Prisma Client
 RUN npx prisma generate
 
+# Provide environment variable here
+ENV DATABASE_URL="postgres://fe55ef7d91944f0a60cf13be5c24fc03e0d4323c3c62d7959f7e6b8341140329:sk_YQXP7Jl6fG3urgPgWxuKk@db.prisma.io:5432/postgres?sslmode=require"
+
 # Expose Prisma Studio port
 EXPOSE 5555
 
