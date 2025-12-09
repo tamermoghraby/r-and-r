@@ -20,4 +20,5 @@ ENV DATABASE_URL="postgres://fe55ef7d91944f0a60cf13be5c24fc03e0d4323c3c62d7959f7
 EXPOSE 5555
 
 # Start Prisma Studio
-CMD ["npx", "prisma", "studio", "--port", "5555", "--browser", "none"]
+# CMD ["npx", "prisma", "studio", "--port", "5555", "--browser", "none"]
+CMD ["npx", "prisma", "studio", "--port", "5555", "--url", "${DATABASE_URL}", "--browser", "none"]
