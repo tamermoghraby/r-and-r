@@ -1,11 +1,12 @@
 import Footer from "@/components/Footer";
 import MenuItem from "@/components/MenuItem";
 import MotionDiv from "@/components/MotionDiv";
+import { createIngredient } from "@/lib/services/ingredients";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function Home() {
+export default async function Home() {
   const kaakeItems = [
     {
       name: "Double Cheese",
@@ -133,18 +134,28 @@ export default function Home() {
       name: "Soft Drinks",
       price: "50,000",
       image: "/assets/images/soft-drinks.jpg",
+      description: "Pepsi, 7Up, Mirinda",
     },
     {
       name: "Small Water",
       price: "20,000",
       image: "/assets/images/water.jpg",
+      description: "Water Bottle 330ml",
     },
   ];
+
+  await createIngredient({
+    name: "Chicken Crispey",
+    unit: "kg",
+    initialQuantity: "50",
+    costPerUnit: "15",
+  });
 
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1 overflow-x-hidden">
       <div className="relative h-fit">
         <Image
+          alt="R and R Logo"
           width={500}
           height={500}
           src={"/assets/images/logo.PNG"}
