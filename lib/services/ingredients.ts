@@ -1,6 +1,18 @@
-// app/services/ingredients.ts
+// lib/services/ingredients.ts
+
 import prisma from "@/lib/prisma";
-import { Decimal } from "@prisma/client/runtime/index-browser";
+
+export const getIngredients = async () => {
+  return await prisma.ingredient.findMany();
+};
+
+export const getIngredientById = async (id: string) => {
+  return await prisma.ingredient.findUnique({ where: { id } });
+};
+
+export const deleteIngredient = async (id: string) => {
+  return await prisma.ingredient.delete({ where: { id } });
+};
 
 export async function createIngredient(data: {
   name: string;
@@ -14,11 +26,11 @@ export async function createIngredient(data: {
     data: {
       name: data.name,
       unit: data.unit,
-      currentQuantity: new Decimal(q),
-      costPerUnit: new Decimal(cost),
+      currentQuantity: q,
+      costPerUnit: cost,
       stockHistory: {
         create: {
-          changeAmount: new Decimal(q),
+          changeAmount: q,
           reason: "initial_stock",
           note: "Initial quantity",
         },
@@ -34,7 +46,7 @@ export async function adjustIngredientStock(
   note?: string,
   relatedOrderId?: string
 ) {
-  const amt = new Decimal(changeAmount);
+  const amt = changeAmount;
   return prisma.$transaction(async (tx) => {
     const ing = await tx.ingredient.update({
       where: { id: ingredientId },

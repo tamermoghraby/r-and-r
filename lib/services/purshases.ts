@@ -1,5 +1,7 @@
 // app/services/purchases.ts
-import { Decimal } from "@prisma/client/runtime/index-browser";
+"use server";
+import { Prisma } from "@/app/generated/prisma/client";
+const Decimal = Prisma.Decimal;
 import prisma from "../prisma";
 
 export async function addPurchase(

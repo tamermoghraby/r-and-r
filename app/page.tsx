@@ -144,13 +144,6 @@ export default async function Home() {
     },
   ];
 
-  await createIngredient({
-    name: "Chicken Crispey",
-    unit: "kg",
-    initialQuantity: "50",
-    costPerUnit: "15",
-  });
-
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1 overflow-x-hidden">
       <div className="relative h-fit">

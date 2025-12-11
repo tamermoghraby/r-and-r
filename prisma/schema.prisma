@@ -43,6 +43,7 @@ model MenuItem {
   price       Decimal              @db.Decimal(20, 2)
   description String?
   image       String?
+  type        String?               // e.g. "food", "beverage"
   createdAt   DateTime             @default(now())
   recipe      MenuItemIngredient[]
   orderItems  OrderItem[]
@@ -66,6 +67,7 @@ model Order {
   status                   String                   @default("completed") // completed, cancelled, pending
   items                    OrderItem[]
   ingredientStockHistories IngredientStockHistory[]
+  createdAt                DateTime                 @default(now())
 }
 
 model OrderItem {
