@@ -4,7 +4,7 @@ import { Decimal } from "@prisma/client/runtime/index-browser";
 
 type OrderItemInput = { menuItemId: string; quantity: number };
 
-export async function createOrder(items: OrderItemInput[]) {
+export async function createOrder(items: OrderItemInput[], note: string = "") {
   if (!items || items.length === 0) throw new Error("No items");
 
   // Use a transaction: we must deduct ingredient stock atomically with order creation.
@@ -55,6 +55,7 @@ export async function createOrder(items: OrderItemInput[]) {
       data: {
         totalPrice: totalPrice,
         status: "completed",
+        note: note,
         items: {
           create: items.map((it) => ({
             menuItemId: it.menuItemId,

@@ -50,6 +50,7 @@ export async function updateMenuItem(
     price?: number;
     description?: string;
     image?: string;
+    type?: string;
     recipe?: { ingredientId: string; quantityRequired: number }[];
   }
 ) {
@@ -62,6 +63,7 @@ export async function updateMenuItem(
         price: data.price,
         description: data.description,
         image: data.image,
+        type: data.type,
       },
     });
 

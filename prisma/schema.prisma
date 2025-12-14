@@ -65,6 +65,7 @@ model Order {
   orderDate                DateTime                 @default(now())
   totalPrice               Decimal                  @db.Decimal(20, 2)
   status                   String                   @default("completed") // completed, cancelled, pending
+  note                     String?                  @default("")
   items                    OrderItem[]
   ingredientStockHistories IngredientStockHistory[]
   createdAt                DateTime                 @default(now())
