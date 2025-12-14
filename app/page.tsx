@@ -68,6 +68,13 @@ export default async function Home() {
       image: "/assets/images/boneless-new.jpg",
     },
     {
+      name: "Tawook Wrap",
+      price: "500,000",
+      description:
+        "Tortilla Wrap, Tawouk, Cheese, Iceberg, Corn, Turkey, Fries, Special randr sauce",
+      image: "/assets/images/tawook-wrap.webp",
+    },
+    {
       name: "Pepperoni Pizza Wrap",
       price: "350,000",
       description: "Tortilla Wrap, Pepperoni, Mozzarella, Oregano, Ketchup",

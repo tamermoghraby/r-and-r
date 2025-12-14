@@ -2,9 +2,29 @@
 
 import { useEffect, useState } from "react";
 import CreateOrderModal from "./_components/CreateOrderModal";
-import { Clock, ChevronDown, ChevronUp, FileText } from "lucide-react";
+import { Clock, ChevronDown, ChevronUp, FileText, Trash2 } from "lucide-react";
 
-type Order = any;
+/* ---------------- TYPES ---------------- */
+
+type OrderItem = {
+  id: string;
+  quantity: number;
+  unitPrice: string;
+  menuItem: {
+    name: string;
+  };
+};
+
+type Order = {
+  id: string;
+  status: "pending" | "completed" | "cancelled";
+  note?: string | null;
+  totalPrice: string;
+  createdAt: string;
+  items: OrderItem[];
+};
+
+/* ---------------- PAGE ---------------- */
 
 export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -13,12 +33,14 @@ export default function OrdersPage() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
+  /* -------- FETCH -------- */
+
   const fetchOrders = async () => {
     const params = new URLSearchParams();
     if (from) params.append("from", from);
     if (to) params.append("to", to);
 
-    const res = await fetch(`/api/orders?${params}`);
+    const res = await fetch(`/api/orders?${params.toString()}`);
     setOrders(await res.json());
   };
 
@@ -26,7 +48,35 @@ export default function OrdersPage() {
     fetchOrders();
   }, []);
 
-  const totalRevenue = orders.reduce((sum, o) => sum + Number(o.totalPrice), 0);
+  /* -------- ANALYTICS -------- */
+
+  const totalRevenue = orders
+    .filter((o) => o.status === "completed")
+    .reduce((sum, o) => sum + Number(o.totalPrice), 0);
+
+  /* -------- ACTIONS -------- */
+
+  const updateOrder = async (
+    id: string,
+    data: Partial<{ status: Order["status"]; note: string }>
+  ) => {
+    await fetch(`/api/orders/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    fetchOrders();
+  };
+
+  const deleteOrder = async (id: string) => {
+    if (!confirm("Delete this order permanently?")) return;
+
+    await fetch(`/api/orders/${id}`, { method: "DELETE" });
+    fetchOrders();
+  };
+
+  /* ---------------- RENDER ---------------- */
 
   return (
     <div className="space-y-10">
@@ -41,15 +91,20 @@ export default function OrdersPage() {
 
         <button
           onClick={() => setShowCreate(true)}
-          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-xl shadow-md"
+          className="bg-primary text-white px-5 py-2.5 rounded-xl shadow-md hover:opacity-90"
         >
           + New Order
         </button>
       </header>
 
-      {/* Analytics */}
+      {/* ANALYTICS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <Stat label="Total Orders" value={orders.length} accent="bg-blue-500" />
+        <Stat
+          label="Total Orders"
+          value={orders.filter((o) => o.status === "completed").length}
+          accent="bg-blue-500"
+          orders={orders}
+        />
         <Stat
           label="Total Revenue"
           value={`$${totalRevenue.toFixed(2)}`}
@@ -85,6 +140,7 @@ export default function OrdersPage() {
 
         {orders.map((order) => {
           const isOpen = expanded === order.id;
+          const isLocked = order.status === "completed";
 
           return (
             <div
@@ -101,7 +157,12 @@ export default function OrdersPage() {
                     <span className="font-semibold">
                       Order #{order.id.slice(-6)}
                     </span>
-                    <StatusBadge status={order.status} />
+
+                    <StatusSelect
+                      status={order.status}
+                      disabled={false}
+                      onChange={(status) => updateOrder(order.id, { status })}
+                    />
                   </div>
 
                   <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -136,11 +197,20 @@ export default function OrdersPage() {
                   </div>
 
                   {/* NOTE */}
-                  {order.note && (
-                    <div className="flex gap-2 text-sm text-gray-700 bg-white p-3 rounded-xl border">
-                      <FileText size={16} className="mt-0.5" />
-                      <span>{order.note}</span>
-                    </div>
+                  <OrderNoteEditor
+                    note={order.note}
+                    onSave={(note) => updateOrder(order.id, { note })}
+                  />
+
+                  {/* ACTIONS */}
+                  {!isLocked && (
+                    <button
+                      onClick={() => deleteOrder(order.id)}
+                      className="flex items-center gap-2 text-sm text-red-600"
+                    >
+                      <Trash2 size={14} />
+                      Delete Order
+                    </button>
                   )}
                 </div>
               )}
@@ -159,19 +229,43 @@ export default function OrdersPage() {
   );
 }
 
-/* ----------------- SMALL COMPONENTS ----------------- */
+/* ---------------- COMPONENTS ---------------- */
 
-function Stat({ label, value, accent }) {
+function Stat({ label, value, accent, orders }: any) {
   return (
     <div className="relative bg-white rounded-xl shadow-sm p-5 overflow-hidden">
       <div className={`absolute right-0 top-0 h-full w-1 ${accent}`} />
       <div className="text-sm text-gray-500">{label}</div>
       <div className="text-2xl font-semibold mt-1">{value}</div>
+
+      {/* If label is total orders, show orders length based on status */}
+      {label === "Total Orders" && (
+        <div className="flex text-sm justify-between items-center mt-4">
+          <div className="relative">
+            <div className="absolute bg-rose-600 text-xs text-white font-bold rounded-full px-1 -top-3 -right-2">
+              {orders.filter((o: any) => o.status === "completed").length}
+            </div>
+            <p className="bg-green-400 text-white px-2 rounded-lg">completed</p>
+          </div>
+          <div className="relative">
+            <div className="absolute bg-rose-600 text-xs text-white font-bold rounded-full px-1 -top-3 -right-2">
+              {orders.filter((o: any) => o.status === "pending").length}
+            </div>
+            <p className="bg-primary text-white px-2 rounded-lg">pending</p>
+          </div>
+          <div className="relative">
+            <div className="absolute bg-rose-600 text-xs text-white font-bold rounded-full px-1 -top-3 -right-2">
+              {orders.filter((o: any) => o.status === "cancelled").length}
+            </div>
+            <p className="bg-red-400 text-white px-2 rounded-lg">cancelled</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function DateFilter({ label, value, onChange }) {
+function DateFilter({ label, value, onChange }: any) {
   return (
     <div className="flex flex-col">
       <label className="text-xs text-gray-500">{label}</label>
@@ -185,21 +279,69 @@ function DateFilter({ label, value, onChange }) {
   );
 }
 
-function StatusBadge({ status }) {
-  const map = {
-    completed: "bg-green-100 text-green-700",
-    pending: "bg-yellow-100 text-yellow-700",
-    cancelled: "bg-red-100 text-red-700",
-  };
+function StatusSelect({
+  status,
+  onChange,
+  disabled,
+}: {
+  status: string;
+  onChange: (v: any) => void;
+  disabled?: boolean;
+}) {
+  return (
+    <select
+      disabled={disabled}
+      value={status}
+      onChange={(e) => onChange(e.target.value)}
+      className={`text-xs border rounded-full px-2 py-0.5 text-white cursor-pointer ${
+        status === "pending"
+          ? "bg-primary"
+          : status === "completed"
+          ? "bg-green-400"
+          : status === "cancelled"
+          ? "bg-red-400"
+          : "bg-white"
+      } `}
+    >
+      <option className="bg-white text-black" value="pending">
+        Pending
+      </option>
+      <option className="bg-white text-black" value="completed">
+        Completed
+      </option>
+      <option className="bg-white text-black" value="cancelled">
+        Cancelled
+      </option>
+    </select>
+  );
+}
+
+function OrderNoteEditor({
+  note,
+  onSave,
+}: {
+  note?: string | null;
+  onSave: (note: string) => void;
+}) {
+  const [value, setValue] = useState(note || "");
 
   return (
-    <span
-      className={`text-xs px-2 py-0.5 rounded-full ${
-        map[status] || "bg-gray-200"
-      }`}
-    >
-      {status}
-    </span>
+    <div className="space-y-2">
+      <div className="flex gap-2 items-start text-sm">
+        <FileText size={16} />
+        <textarea
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          rows={2}
+          placeholder="Add note…"
+          className="w-full border rounded-lg p-2"
+        />
+      </div>
+
+      <button onClick={() => onSave(value)} className="text-xs text-blue-600">
+        Save note
+      </button>
+    </div>
   );
 }
 
