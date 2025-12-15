@@ -4,12 +4,15 @@ import { useState } from "react";
 import IngredientForm from "./IngredientForm";
 import AdjustStockForm from "./AdjustStockForm";
 import IngredientHistory from "./IngredientHistory";
+import PurchaseIngredientModal from "./PurchaseIngredientModal";
 
 export default function IngredientList({ ingredients: initialIngredients }) {
   const [ingredients, setIngredients] = useState(initialIngredients);
   const [selected, setSelected] = useState(null);
   const [stockTarget, setStockTarget] = useState(null);
   const [historyTarget, setHistoryTarget] = useState(null);
+  const [purchaseTarget, setPurchaseTarget] = useState(null);
+
   const [showCreate, setShowCreate] = useState(false);
 
   // Helper to refresh ingredient after create/edit/stock adjustment
@@ -64,6 +67,14 @@ export default function IngredientList({ ingredients: initialIngredients }) {
         />
       )}
 
+      {purchaseTarget && (
+        <PurchaseIngredientModal
+          ingredient={purchaseTarget}
+          onClose={() => setPurchaseTarget(null)}
+          onSuccess={refreshIngredient}
+        />
+      )}
+
       <div className="rounded shadow divide-y space-y-4">
         {ingredients.map((ing) => (
           <div
@@ -86,10 +97,10 @@ export default function IngredientList({ ingredients: initialIngredients }) {
               </button>
 
               <button
-                className="px-3 py-1 text-sm bg-yellow-300 rounded"
-                onClick={() => setStockTarget(ing)}
+                className="px-3 py-1 text-sm bg-green-500 text-white rounded"
+                onClick={() => setPurchaseTarget(ing)}
               >
-                Adjust Stock
+                Purchase
               </button>
 
               <button
@@ -100,17 +111,13 @@ export default function IngredientList({ ingredients: initialIngredients }) {
               </button>
 
               <button
-                className="px-3 py-1 text-sm bg-red-500 rounded"
+                className="px-3 py-1 text-sm bg-red-500 text-white rounded"
                 onClick={async () => {
-                  if (
-                    confirm(
-                      `Are you sure you want to delete ingredient "${ing.name}"? This action cannot be undone.`
-                    )
-                  ) {
+                  if (confirm(`Delete "${ing.name}"?`)) {
                     await fetch(`/api/ingredients/${ing.id}`, {
                       method: "DELETE",
                     });
-                    await refreshIngredient(); // Refresh after deletion
+                    await refreshIngredient();
                   }
                 }}
               >

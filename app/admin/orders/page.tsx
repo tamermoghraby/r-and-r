@@ -338,7 +338,10 @@ function OrderNoteEditor({
         />
       </div>
 
-      <button onClick={() => onSave(value)} className="text-xs text-blue-600">
+      <button
+        onClick={() => onSave(value)}
+        className="text-xs bg-blue-600 text-white rounded-md p-1"
+      >
         Save note
       </button>
     </div>

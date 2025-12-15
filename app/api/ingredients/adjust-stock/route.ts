@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 import { adjustIngredientStock } from "@/lib/services/ingredients";
-import { revalidatePath } from "next/cache";
 
 export async function POST(request: Request) {
   try {

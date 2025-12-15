@@ -23,12 +23,12 @@ export default function AdminLayout({ children }) {
 
   return (
     <ToastProvider>
-      <div className="flex h-screen bg-white text-black">
+      <div className="flex bg-white text-black">
         <Sidebar collapsed={collapsed} />
 
         <div className="flex-1 flex flex-col">
           <Header onToggleSidebar={toggleSidebar} />
-          <div className="p-6 ">{children}</div>
+          <div className="p-6">{children}</div>
         </div>
       </div>
     </ToastProvider>

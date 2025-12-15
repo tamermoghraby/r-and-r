@@ -14,7 +14,7 @@ import {
 export default function Sidebar({ collapsed }) {
   return (
     <div
-      className={`bg-gray-200 border-r h-full transition-all duration-300 ${
+      className={`bg-gray-200 border-r h-full min-h-screen transition-all duration-300 ${
         collapsed ? "w-16" : "w-56"
       }`}
     >
@@ -48,8 +48,8 @@ export default function Sidebar({ collapsed }) {
           collapsed={collapsed}
         />
         <SidebarItem
-          href="/admin/reports"
-          title="Reports"
+          href="/admin/analytics"
+          title="Analytics"
           icon={<FiBarChart2 />}
           collapsed={collapsed}
         />

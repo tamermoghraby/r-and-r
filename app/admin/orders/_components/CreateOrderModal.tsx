@@ -102,7 +102,7 @@ export default function CreateOrderModal({
       }),
     });
 
-    toast("Order created successfully ✅");
+    toast.success("Order created successfully ✅");
     onCreated();
     onClose();
   };
