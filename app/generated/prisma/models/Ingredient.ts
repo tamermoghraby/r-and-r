@@ -43,6 +43,7 @@ export type IngredientMinAggregateOutputType = {
   currentQuantity: runtime.Decimal | null
   costPerUnit: runtime.Decimal | null
   createdAt: Date | null
+  restaurantId: string | null
 }
 
 export type IngredientMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type IngredientMaxAggregateOutputType = {
   currentQuantity: runtime.Decimal | null
   costPerUnit: runtime.Decimal | null
   createdAt: Date | null
+  restaurantId: string | null
 }
 
 export type IngredientCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type IngredientCountAggregateOutputType = {
   currentQuantity: number
   costPerUnit: number
   createdAt: number
+  restaurantId: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type IngredientMinAggregateInputType = {
   currentQuantity?: true
   costPerUnit?: true
   createdAt?: true
+  restaurantId?: true
 }
 
 export type IngredientMaxAggregateInputType = {
@@ -91,6 +95,7 @@ export type IngredientMaxAggregateInputType = {
   currentQuantity?: true
   costPerUnit?: true
   createdAt?: true
+  restaurantId?: true
 }
 
 export type IngredientCountAggregateInputType = {
@@ -100,6 +105,7 @@ export type IngredientCountAggregateInputType = {
   currentQuantity?: true
   costPerUnit?: true
   createdAt?: true
+  restaurantId?: true
   _all?: true
 }
 
@@ -196,6 +202,7 @@ export type IngredientGroupByOutputType = {
   currentQuantity: runtime.Decimal
   costPerUnit: runtime.Decimal
   createdAt: Date
+  restaurantId: string
   _count: IngredientCountAggregateOutputType | null
   _avg: IngredientAvgAggregateOutputType | null
   _sum: IngredientSumAggregateOutputType | null
@@ -228,6 +235,8 @@ export type IngredientWhereInput = {
   currentQuantity?: Prisma.DecimalFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+  restaurantId?: Prisma.StringFilter<"Ingredient"> | string
+  restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   stockHistory?: Prisma.IngredientStockHistoryListRelationFilter
   menuItemRequires?: Prisma.MenuItemIngredientListRelationFilter
   purchases?: Prisma.PurchaseListRelationFilter
@@ -240,6 +249,8 @@ export type IngredientOrderByWithRelationInput = {
   currentQuantity?: Prisma.SortOrder
   costPerUnit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  restaurantId?: Prisma.SortOrder
+  restaurant?: Prisma.RestaurantOrderByWithRelationInput
   stockHistory?: Prisma.IngredientStockHistoryOrderByRelationAggregateInput
   menuItemRequires?: Prisma.MenuItemIngredientOrderByRelationAggregateInput
   purchases?: Prisma.PurchaseOrderByRelationAggregateInput
@@ -247,18 +258,21 @@ export type IngredientOrderByWithRelationInput = {
 
 export type IngredientWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  name?: string
+  restaurantId_name?: Prisma.IngredientRestaurantIdNameCompoundUniqueInput
   AND?: Prisma.IngredientWhereInput | Prisma.IngredientWhereInput[]
   OR?: Prisma.IngredientWhereInput[]
   NOT?: Prisma.IngredientWhereInput | Prisma.IngredientWhereInput[]
+  name?: Prisma.StringFilter<"Ingredient"> | string
   unit?: Prisma.StringFilter<"Ingredient"> | string
   currentQuantity?: Prisma.DecimalFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+  restaurantId?: Prisma.StringFilter<"Ingredient"> | string
+  restaurant?: Prisma.XOR<Prisma.RestaurantScalarRelationFilter, Prisma.RestaurantWhereInput>
   stockHistory?: Prisma.IngredientStockHistoryListRelationFilter
   menuItemRequires?: Prisma.MenuItemIngredientListRelationFilter
   purchases?: Prisma.PurchaseListRelationFilter
-}, "id" | "name">
+}, "id" | "restaurantId_name">
 
 export type IngredientOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -267,6 +281,7 @@ export type IngredientOrderByWithAggregationInput = {
   currentQuantity?: Prisma.SortOrder
   costPerUnit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  restaurantId?: Prisma.SortOrder
   _count?: Prisma.IngredientCountOrderByAggregateInput
   _avg?: Prisma.IngredientAvgOrderByAggregateInput
   _max?: Prisma.IngredientMaxOrderByAggregateInput
@@ -284,6 +299,7 @@ export type IngredientScalarWhereWithAggregatesInput = {
   currentQuantity?: Prisma.DecimalWithAggregatesFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalWithAggregatesFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
+  restaurantId?: Prisma.StringWithAggregatesFilter<"Ingredient"> | string
 }
 
 export type IngredientCreateInput = {
@@ -293,6 +309,7 @@ export type IngredientCreateInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutIngredientsInput
   stockHistory?: Prisma.IngredientStockHistoryCreateNestedManyWithoutIngredientInput
   menuItemRequires?: Prisma.MenuItemIngredientCreateNestedManyWithoutIngredientInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutIngredientInput
@@ -305,6 +322,7 @@ export type IngredientUncheckedCreateInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurantId: string
   stockHistory?: Prisma.IngredientStockHistoryUncheckedCreateNestedManyWithoutIngredientInput
   menuItemRequires?: Prisma.MenuItemIngredientUncheckedCreateNestedManyWithoutIngredientInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutIngredientInput
@@ -317,6 +335,7 @@ export type IngredientUpdateInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutIngredientsNestedInput
   stockHistory?: Prisma.IngredientStockHistoryUpdateManyWithoutIngredientNestedInput
   menuItemRequires?: Prisma.MenuItemIngredientUpdateManyWithoutIngredientNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutIngredientNestedInput
@@ -329,6 +348,7 @@ export type IngredientUncheckedUpdateInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   stockHistory?: Prisma.IngredientStockHistoryUncheckedUpdateManyWithoutIngredientNestedInput
   menuItemRequires?: Prisma.MenuItemIngredientUncheckedUpdateManyWithoutIngredientNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutIngredientNestedInput
@@ -341,6 +361,7 @@ export type IngredientCreateManyInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurantId: string
 }
 
 export type IngredientUpdateManyMutationInput = {
@@ -359,6 +380,22 @@ export type IngredientUncheckedUpdateManyInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type IngredientListRelationFilter = {
+  every?: Prisma.IngredientWhereInput
+  some?: Prisma.IngredientWhereInput
+  none?: Prisma.IngredientWhereInput
+}
+
+export type IngredientOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type IngredientRestaurantIdNameCompoundUniqueInput = {
+  restaurantId: string
+  name: string
 }
 
 export type IngredientCountOrderByAggregateInput = {
@@ -368,6 +405,7 @@ export type IngredientCountOrderByAggregateInput = {
   currentQuantity?: Prisma.SortOrder
   costPerUnit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  restaurantId?: Prisma.SortOrder
 }
 
 export type IngredientAvgOrderByAggregateInput = {
@@ -382,6 +420,7 @@ export type IngredientMaxOrderByAggregateInput = {
   currentQuantity?: Prisma.SortOrder
   costPerUnit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  restaurantId?: Prisma.SortOrder
 }
 
 export type IngredientMinOrderByAggregateInput = {
@@ -391,6 +430,7 @@ export type IngredientMinOrderByAggregateInput = {
   currentQuantity?: Prisma.SortOrder
   costPerUnit?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  restaurantId?: Prisma.SortOrder
 }
 
 export type IngredientSumOrderByAggregateInput = {
@@ -403,8 +443,46 @@ export type IngredientScalarRelationFilter = {
   isNot?: Prisma.IngredientWhereInput
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type IngredientCreateNestedManyWithoutRestaurantInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutRestaurantInput, Prisma.IngredientUncheckedCreateWithoutRestaurantInput> | Prisma.IngredientCreateWithoutRestaurantInput[] | Prisma.IngredientUncheckedCreateWithoutRestaurantInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutRestaurantInput | Prisma.IngredientCreateOrConnectWithoutRestaurantInput[]
+  createMany?: Prisma.IngredientCreateManyRestaurantInputEnvelope
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+}
+
+export type IngredientUncheckedCreateNestedManyWithoutRestaurantInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutRestaurantInput, Prisma.IngredientUncheckedCreateWithoutRestaurantInput> | Prisma.IngredientCreateWithoutRestaurantInput[] | Prisma.IngredientUncheckedCreateWithoutRestaurantInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutRestaurantInput | Prisma.IngredientCreateOrConnectWithoutRestaurantInput[]
+  createMany?: Prisma.IngredientCreateManyRestaurantInputEnvelope
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+}
+
+export type IngredientUpdateManyWithoutRestaurantNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutRestaurantInput, Prisma.IngredientUncheckedCreateWithoutRestaurantInput> | Prisma.IngredientCreateWithoutRestaurantInput[] | Prisma.IngredientUncheckedCreateWithoutRestaurantInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutRestaurantInput | Prisma.IngredientCreateOrConnectWithoutRestaurantInput[]
+  upsert?: Prisma.IngredientUpsertWithWhereUniqueWithoutRestaurantInput | Prisma.IngredientUpsertWithWhereUniqueWithoutRestaurantInput[]
+  createMany?: Prisma.IngredientCreateManyRestaurantInputEnvelope
+  set?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  disconnect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  delete?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  update?: Prisma.IngredientUpdateWithWhereUniqueWithoutRestaurantInput | Prisma.IngredientUpdateWithWhereUniqueWithoutRestaurantInput[]
+  updateMany?: Prisma.IngredientUpdateManyWithWhereWithoutRestaurantInput | Prisma.IngredientUpdateManyWithWhereWithoutRestaurantInput[]
+  deleteMany?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+}
+
+export type IngredientUncheckedUpdateManyWithoutRestaurantNestedInput = {
+  create?: Prisma.XOR<Prisma.IngredientCreateWithoutRestaurantInput, Prisma.IngredientUncheckedCreateWithoutRestaurantInput> | Prisma.IngredientCreateWithoutRestaurantInput[] | Prisma.IngredientUncheckedCreateWithoutRestaurantInput[]
+  connectOrCreate?: Prisma.IngredientCreateOrConnectWithoutRestaurantInput | Prisma.IngredientCreateOrConnectWithoutRestaurantInput[]
+  upsert?: Prisma.IngredientUpsertWithWhereUniqueWithoutRestaurantInput | Prisma.IngredientUpsertWithWhereUniqueWithoutRestaurantInput[]
+  createMany?: Prisma.IngredientCreateManyRestaurantInputEnvelope
+  set?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  disconnect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  delete?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  connect?: Prisma.IngredientWhereUniqueInput | Prisma.IngredientWhereUniqueInput[]
+  update?: Prisma.IngredientUpdateWithWhereUniqueWithoutRestaurantInput | Prisma.IngredientUpdateWithWhereUniqueWithoutRestaurantInput[]
+  updateMany?: Prisma.IngredientUpdateManyWithWhereWithoutRestaurantInput | Prisma.IngredientUpdateManyWithWhereWithoutRestaurantInput[]
+  deleteMany?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -413,10 +491,6 @@ export type DecimalFieldUpdateOperationsInput = {
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type IngredientCreateNestedOneWithoutStockHistoryInput = {
@@ -461,6 +535,69 @@ export type IngredientUpdateOneRequiredWithoutPurchasesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IngredientUpdateToOneWithWhereWithoutPurchasesInput, Prisma.IngredientUpdateWithoutPurchasesInput>, Prisma.IngredientUncheckedUpdateWithoutPurchasesInput>
 }
 
+export type IngredientCreateWithoutRestaurantInput = {
+  id?: string
+  name: string
+  unit: string
+  currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  stockHistory?: Prisma.IngredientStockHistoryCreateNestedManyWithoutIngredientInput
+  menuItemRequires?: Prisma.MenuItemIngredientCreateNestedManyWithoutIngredientInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutIngredientInput
+}
+
+export type IngredientUncheckedCreateWithoutRestaurantInput = {
+  id?: string
+  name: string
+  unit: string
+  currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+  stockHistory?: Prisma.IngredientStockHistoryUncheckedCreateNestedManyWithoutIngredientInput
+  menuItemRequires?: Prisma.MenuItemIngredientUncheckedCreateNestedManyWithoutIngredientInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutIngredientInput
+}
+
+export type IngredientCreateOrConnectWithoutRestaurantInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutRestaurantInput, Prisma.IngredientUncheckedCreateWithoutRestaurantInput>
+}
+
+export type IngredientCreateManyRestaurantInputEnvelope = {
+  data: Prisma.IngredientCreateManyRestaurantInput | Prisma.IngredientCreateManyRestaurantInput[]
+  skipDuplicates?: boolean
+}
+
+export type IngredientUpsertWithWhereUniqueWithoutRestaurantInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  update: Prisma.XOR<Prisma.IngredientUpdateWithoutRestaurantInput, Prisma.IngredientUncheckedUpdateWithoutRestaurantInput>
+  create: Prisma.XOR<Prisma.IngredientCreateWithoutRestaurantInput, Prisma.IngredientUncheckedCreateWithoutRestaurantInput>
+}
+
+export type IngredientUpdateWithWhereUniqueWithoutRestaurantInput = {
+  where: Prisma.IngredientWhereUniqueInput
+  data: Prisma.XOR<Prisma.IngredientUpdateWithoutRestaurantInput, Prisma.IngredientUncheckedUpdateWithoutRestaurantInput>
+}
+
+export type IngredientUpdateManyWithWhereWithoutRestaurantInput = {
+  where: Prisma.IngredientScalarWhereInput
+  data: Prisma.XOR<Prisma.IngredientUpdateManyMutationInput, Prisma.IngredientUncheckedUpdateManyWithoutRestaurantInput>
+}
+
+export type IngredientScalarWhereInput = {
+  AND?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+  OR?: Prisma.IngredientScalarWhereInput[]
+  NOT?: Prisma.IngredientScalarWhereInput | Prisma.IngredientScalarWhereInput[]
+  id?: Prisma.StringFilter<"Ingredient"> | string
+  name?: Prisma.StringFilter<"Ingredient"> | string
+  unit?: Prisma.StringFilter<"Ingredient"> | string
+  currentQuantity?: Prisma.DecimalFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit?: Prisma.DecimalFilter<"Ingredient"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFilter<"Ingredient"> | Date | string
+  restaurantId?: Prisma.StringFilter<"Ingredient"> | string
+}
+
 export type IngredientCreateWithoutStockHistoryInput = {
   id?: string
   name: string
@@ -468,6 +605,7 @@ export type IngredientCreateWithoutStockHistoryInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutIngredientsInput
   menuItemRequires?: Prisma.MenuItemIngredientCreateNestedManyWithoutIngredientInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutIngredientInput
 }
@@ -479,6 +617,7 @@ export type IngredientUncheckedCreateWithoutStockHistoryInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurantId: string
   menuItemRequires?: Prisma.MenuItemIngredientUncheckedCreateNestedManyWithoutIngredientInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutIngredientInput
 }
@@ -506,6 +645,7 @@ export type IngredientUpdateWithoutStockHistoryInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutIngredientsNestedInput
   menuItemRequires?: Prisma.MenuItemIngredientUpdateManyWithoutIngredientNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutIngredientNestedInput
 }
@@ -517,6 +657,7 @@ export type IngredientUncheckedUpdateWithoutStockHistoryInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   menuItemRequires?: Prisma.MenuItemIngredientUncheckedUpdateManyWithoutIngredientNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutIngredientNestedInput
 }
@@ -528,6 +669,7 @@ export type IngredientCreateWithoutMenuItemRequiresInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutIngredientsInput
   stockHistory?: Prisma.IngredientStockHistoryCreateNestedManyWithoutIngredientInput
   purchases?: Prisma.PurchaseCreateNestedManyWithoutIngredientInput
 }
@@ -539,6 +681,7 @@ export type IngredientUncheckedCreateWithoutMenuItemRequiresInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurantId: string
   stockHistory?: Prisma.IngredientStockHistoryUncheckedCreateNestedManyWithoutIngredientInput
   purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutIngredientInput
 }
@@ -566,6 +709,7 @@ export type IngredientUpdateWithoutMenuItemRequiresInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutIngredientsNestedInput
   stockHistory?: Prisma.IngredientStockHistoryUpdateManyWithoutIngredientNestedInput
   purchases?: Prisma.PurchaseUpdateManyWithoutIngredientNestedInput
 }
@@ -577,6 +721,7 @@ export type IngredientUncheckedUpdateWithoutMenuItemRequiresInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   stockHistory?: Prisma.IngredientStockHistoryUncheckedUpdateManyWithoutIngredientNestedInput
   purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutIngredientNestedInput
 }
@@ -588,6 +733,7 @@ export type IngredientCreateWithoutPurchasesInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurant: Prisma.RestaurantCreateNestedOneWithoutIngredientsInput
   stockHistory?: Prisma.IngredientStockHistoryCreateNestedManyWithoutIngredientInput
   menuItemRequires?: Prisma.MenuItemIngredientCreateNestedManyWithoutIngredientInput
 }
@@ -599,6 +745,7 @@ export type IngredientUncheckedCreateWithoutPurchasesInput = {
   currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Date | string
+  restaurantId: string
   stockHistory?: Prisma.IngredientStockHistoryUncheckedCreateNestedManyWithoutIngredientInput
   menuItemRequires?: Prisma.MenuItemIngredientUncheckedCreateNestedManyWithoutIngredientInput
 }
@@ -626,6 +773,7 @@ export type IngredientUpdateWithoutPurchasesInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurant?: Prisma.RestaurantUpdateOneRequiredWithoutIngredientsNestedInput
   stockHistory?: Prisma.IngredientStockHistoryUpdateManyWithoutIngredientNestedInput
   menuItemRequires?: Prisma.MenuItemIngredientUpdateManyWithoutIngredientNestedInput
 }
@@ -637,8 +785,51 @@ export type IngredientUncheckedUpdateWithoutPurchasesInput = {
   currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  restaurantId?: Prisma.StringFieldUpdateOperationsInput | string
   stockHistory?: Prisma.IngredientStockHistoryUncheckedUpdateManyWithoutIngredientNestedInput
   menuItemRequires?: Prisma.MenuItemIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+}
+
+export type IngredientCreateManyRestaurantInput = {
+  id?: string
+  name: string
+  unit: string
+  currentQuantity?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit: runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Date | string
+}
+
+export type IngredientUpdateWithoutRestaurantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stockHistory?: Prisma.IngredientStockHistoryUpdateManyWithoutIngredientNestedInput
+  menuItemRequires?: Prisma.MenuItemIngredientUpdateManyWithoutIngredientNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateWithoutRestaurantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stockHistory?: Prisma.IngredientStockHistoryUncheckedUpdateManyWithoutIngredientNestedInput
+  menuItemRequires?: Prisma.MenuItemIngredientUncheckedUpdateManyWithoutIngredientNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutIngredientNestedInput
+}
+
+export type IngredientUncheckedUpdateManyWithoutRestaurantInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  unit?: Prisma.StringFieldUpdateOperationsInput | string
+  currentQuantity?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  costPerUnit?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -697,6 +888,8 @@ export type IngredientSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   currentQuantity?: boolean
   costPerUnit?: boolean
   createdAt?: boolean
+  restaurantId?: boolean
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   stockHistory?: boolean | Prisma.Ingredient$stockHistoryArgs<ExtArgs>
   menuItemRequires?: boolean | Prisma.Ingredient$menuItemRequiresArgs<ExtArgs>
   purchases?: boolean | Prisma.Ingredient$purchasesArgs<ExtArgs>
@@ -710,6 +903,8 @@ export type IngredientSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   currentQuantity?: boolean
   costPerUnit?: boolean
   createdAt?: boolean
+  restaurantId?: boolean
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredient"]>
 
 export type IngredientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -719,6 +914,8 @@ export type IngredientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   currentQuantity?: boolean
   costPerUnit?: boolean
   createdAt?: boolean
+  restaurantId?: boolean
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ingredient"]>
 
 export type IngredientSelectScalar = {
@@ -728,21 +925,28 @@ export type IngredientSelectScalar = {
   currentQuantity?: boolean
   costPerUnit?: boolean
   createdAt?: boolean
+  restaurantId?: boolean
 }
 
-export type IngredientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "unit" | "currentQuantity" | "costPerUnit" | "createdAt", ExtArgs["result"]["ingredient"]>
+export type IngredientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "unit" | "currentQuantity" | "costPerUnit" | "createdAt" | "restaurantId", ExtArgs["result"]["ingredient"]>
 export type IngredientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
   stockHistory?: boolean | Prisma.Ingredient$stockHistoryArgs<ExtArgs>
   menuItemRequires?: boolean | Prisma.Ingredient$menuItemRequiresArgs<ExtArgs>
   purchases?: boolean | Prisma.Ingredient$purchasesArgs<ExtArgs>
   _count?: boolean | Prisma.IngredientCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type IngredientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type IngredientIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type IngredientIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
+}
+export type IngredientIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  restaurant?: boolean | Prisma.RestaurantDefaultArgs<ExtArgs>
+}
 
 export type $IngredientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Ingredient"
   objects: {
+    restaurant: Prisma.$RestaurantPayload<ExtArgs>
     stockHistory: Prisma.$IngredientStockHistoryPayload<ExtArgs>[]
     menuItemRequires: Prisma.$MenuItemIngredientPayload<ExtArgs>[]
     purchases: Prisma.$PurchasePayload<ExtArgs>[]
@@ -754,6 +958,7 @@ export type $IngredientPayload<ExtArgs extends runtime.Types.Extensions.Internal
     currentQuantity: runtime.Decimal
     costPerUnit: runtime.Decimal
     createdAt: Date
+    restaurantId: string
   }, ExtArgs["result"]["ingredient"]>
   composites: {}
 }
@@ -1148,6 +1353,7 @@ readonly fields: IngredientFieldRefs;
  */
 export interface Prisma__IngredientClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  restaurant<T extends Prisma.RestaurantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RestaurantDefaultArgs<ExtArgs>>): Prisma.Prisma__RestaurantClient<runtime.Types.Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   stockHistory<T extends Prisma.Ingredient$stockHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$stockHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IngredientStockHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   menuItemRequires<T extends Prisma.Ingredient$menuItemRequiresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$menuItemRequiresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MenuItemIngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchases<T extends Prisma.Ingredient$purchasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ingredient$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1186,6 +1392,7 @@ export interface IngredientFieldRefs {
   readonly currentQuantity: Prisma.FieldRef<"Ingredient", 'Decimal'>
   readonly costPerUnit: Prisma.FieldRef<"Ingredient", 'Decimal'>
   readonly createdAt: Prisma.FieldRef<"Ingredient", 'DateTime'>
+  readonly restaurantId: Prisma.FieldRef<"Ingredient", 'String'>
 }
     
 
@@ -1435,6 +1642,10 @@ export type IngredientCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    */
   data: Prisma.IngredientCreateManyInput | Prisma.IngredientCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IngredientIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1505,6 +1716,10 @@ export type IngredientUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many Ingredients to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IngredientIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

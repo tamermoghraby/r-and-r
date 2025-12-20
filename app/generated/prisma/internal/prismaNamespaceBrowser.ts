@@ -51,6 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Restaurant: 'Restaurant',
+  User: 'User',
   Ingredient: 'Ingredient',
   IngredientStockHistory: 'IngredientStockHistory',
   MenuItem: 'MenuItem',
@@ -58,8 +60,7 @@ export const ModelName = {
   Order: 'Order',
   OrderItem: 'OrderItem',
   Expense: 'Expense',
-  Purchase: 'Purchase',
-  User: 'User'
+  Purchase: 'Purchase'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -78,13 +79,38 @@ export const TransactionIsolationLevel = {
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const RestaurantScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address',
+  phone: 'phone',
+  createdAt: 'createdAt'
+} as const
+
+export type RestaurantScalarFieldEnum = (typeof RestaurantScalarFieldEnum)[keyof typeof RestaurantScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  username: 'username',
+  passwordHash: 'passwordHash',
+  role: 'role',
+  restaurantId: 'restaurantId',
+  createdAt: 'createdAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
 export const IngredientScalarFieldEnum = {
   id: 'id',
   name: 'name',
   unit: 'unit',
   currentQuantity: 'currentQuantity',
   costPerUnit: 'costPerUnit',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  restaurantId: 'restaurantId'
 } as const
 
 export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
@@ -110,7 +136,8 @@ export const MenuItemScalarFieldEnum = {
   description: 'description',
   image: 'image',
   type: 'type',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  restaurantId: 'restaurantId'
 } as const
 
 export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
@@ -132,7 +159,8 @@ export const OrderScalarFieldEnum = {
   totalPrice: 'totalPrice',
   status: 'status',
   note: 'note',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  restaurantId: 'restaurantId'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -155,7 +183,8 @@ export const ExpenseScalarFieldEnum = {
   amount: 'amount',
   expenseDate: 'expenseDate',
   category: 'category',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  restaurantId: 'restaurantId'
 } as const
 
 export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
@@ -167,21 +196,11 @@ export const PurchaseScalarFieldEnum = {
   quantity: 'quantity',
   totalCost: 'totalCost',
   note: 'note',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  restaurantId: 'restaurantId'
 } as const
 
 export type PurchaseScalarFieldEnum = (typeof PurchaseScalarFieldEnum)[keyof typeof PurchaseScalarFieldEnum]
-
-
-export const UserScalarFieldEnum = {
-  id: 'id',
-  username: 'username',
-  passwordHash: 'passwordHash',
-  role: 'role',
-  createdAt: 'createdAt'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const SortOrder = {

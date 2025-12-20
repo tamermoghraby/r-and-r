@@ -1,26 +1,19 @@
+import { withAuth } from "@/lib/api/withAuth";
 import prisma from "@/lib/prisma";
+import restaurantWhere from "@/lib/utils/restaurantScope";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
-
-  try {
+export const GET = withAuth(
+  async (user, _, { params }: any) => {
     const history = await prisma.ingredientStockHistory.findMany({
-      where: { ingredientId: id },
-      orderBy: { createdAt: "desc" }, // newest first
+      where: {
+        ingredientId: params.id,
+        ingredient: restaurantWhere(user),
+      },
+      orderBy: { createdAt: "desc" },
     });
 
-    console.log("Fetched ingredient history:", history);
-
-    return NextResponse.json(history, { status: 200 });
-  } catch (err) {
-    console.error("Failed to fetch ingredient history:", err);
-    return NextResponse.json(
-      { error: "Failed to fetch ingredient history" },
-      { status: 500 }
-    );
-  }
-}
+    return NextResponse.json(history);
+  },
+  { roles: ["admin", "owner", "staff"] }
+);

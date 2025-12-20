@@ -1,36 +1,52 @@
+import { withAuth } from "@/lib/api/withAuth";
 import prisma from "@/lib/prisma";
-import {
-  deleteIngredient,
-  getIngredientById,
-} from "@/lib/services/ingredients";
+import restaurantWhere from "@/lib/utils/restaurantScope";
 import { NextResponse } from "next/server";
 
-export async function GET(_: Request, { params }: { params: { id: string } }) {
-  const item = await getIngredientById(params.id);
-  return NextResponse.json(item);
-}
+export const GET = withAuth(
+  async (user, _, { params }: any) => {
+    const ingredient = await prisma.ingredient.findFirst({
+      where: {
+        id: params.id,
+        ...restaurantWhere(user),
+      },
+    });
 
-export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const data = await req.json();
-  const updated = await prisma.ingredient.update({
-    where: { id: params.id },
-    data: {
-      name: data.name,
-      unit: data.unit,
-      costPerUnit: data.costPerUnit,
-    },
-  });
-  return NextResponse.json(updated);
-}
+    if (!ingredient)
+      return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-export async function DELETE(
-  _: Request,
-  { params }: { params: { id: string } }
-) {
-  await prisma.ingredientStockHistory.deleteMany({});
-  await deleteIngredient(params.id);
-  return NextResponse.json({ success: true });
-}
+    return NextResponse.json(ingredient);
+  },
+  { roles: ["admin", "owner", "staff"] }
+);
+
+export const PUT = withAuth(
+  async (user, req, { params }: any) => {
+    const data = await req.json();
+
+    const updated = await prisma.ingredient.updateMany({
+      where: {
+        id: params.id,
+        ...restaurantWhere(user),
+      },
+      data,
+    });
+
+    return NextResponse.json(updated);
+  },
+  { roles: ["admin", "owner"] }
+);
+
+export const DELETE = withAuth(
+  async (user, _, { params }: any) => {
+    await prisma.ingredient.deleteMany({
+      where: {
+        id: params.id,
+        ...restaurantWhere(user),
+      },
+    });
+
+    return NextResponse.json({ success: true });
+  },
+  { roles: ["admin", "owner"] }
+);

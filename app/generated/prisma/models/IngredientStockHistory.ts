@@ -449,10 +449,6 @@ export type IngredientStockHistoryUncheckedUpdateManyWithoutIngredientNestedInpu
   deleteMany?: Prisma.IngredientStockHistoryScalarWhereInput | Prisma.IngredientStockHistoryScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type IngredientStockHistoryCreateNestedManyWithoutRelatedOrderInput = {
   create?: Prisma.XOR<Prisma.IngredientStockHistoryCreateWithoutRelatedOrderInput, Prisma.IngredientStockHistoryUncheckedCreateWithoutRelatedOrderInput> | Prisma.IngredientStockHistoryCreateWithoutRelatedOrderInput[] | Prisma.IngredientStockHistoryUncheckedCreateWithoutRelatedOrderInput[]
   connectOrCreate?: Prisma.IngredientStockHistoryCreateOrConnectWithoutRelatedOrderInput | Prisma.IngredientStockHistoryCreateOrConnectWithoutRelatedOrderInput[]

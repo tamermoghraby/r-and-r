@@ -1,4 +1,6 @@
-export default function AdminHome() {
+import { requireAuth } from "@/lib/auth/requireAuth";
+
+export default async function AdminHome() {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Welcome to Admin Dashboard</h1>

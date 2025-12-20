@@ -1,9 +1,12 @@
 // lib/services/ingredients.ts
 
 import prisma from "@/lib/prisma";
+import restaurantWhere from "../utils/restaurantScope";
 
-export const getIngredients = async () => {
-  return await prisma.ingredient.findMany();
+export const getIngredients = async (user) => {
+  return await prisma.ingredient.findMany({
+    where: { restaurantId: user.restaurantId },
+  });
 };
 
 export const getIngredientById = async (id: string) => {
@@ -19,11 +22,13 @@ export async function createIngredient(data: {
   unit: string;
   initialQuantity?: string | number;
   costPerUnit?: string | number;
+  user: { restaurantId: string };
 }) {
   const q = data.initialQuantity ?? 0;
   const cost = data.costPerUnit ?? 0;
   return prisma.ingredient.create({
     data: {
+      restaurantId: data.user.restaurantId,
       name: data.name,
       unit: data.unit,
       currentQuantity: q,
@@ -44,12 +49,13 @@ export async function adjustIngredientStock(
   changeAmount: string | number,
   reason = "adjustment",
   note?: string,
-  relatedOrderId?: string
+  relatedOrderId?: string,
+  user?: any
 ) {
   const amt = changeAmount;
   return prisma.$transaction(async (tx) => {
     const ing = await tx.ingredient.update({
-      where: { id: ingredientId },
+      where: { id: ingredientId, ...restaurantWhere(user.restaurantId) },
       data: {
         currentQuantity: { increment: amt },
       },

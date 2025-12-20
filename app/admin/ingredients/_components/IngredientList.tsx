@@ -17,7 +17,7 @@ export default function IngredientList({ ingredients: initialIngredients }) {
 
   // Helper to refresh ingredient after create/edit/stock adjustment
   const refreshIngredient = async () => {
-    const res = await fetch("/api/ingredients");
+    const res = await fetch("/api/ingredients", { cache: "no-store" });
     const data = await res.json();
     setIngredients(data);
   };
@@ -101,6 +101,13 @@ export default function IngredientList({ ingredients: initialIngredients }) {
                 onClick={() => setPurchaseTarget(ing)}
               >
                 Purchase
+              </button>
+
+              <button
+                className="px-3 py-1 text-sm bg-yellow-300 rounded"
+                onClick={() => setStockTarget(ing)}
+              >
+                Adjust Stock
               </button>
 
               <button

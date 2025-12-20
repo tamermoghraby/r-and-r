@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { createOrder } from "@/lib/services/orders";
+import { withAuth } from "@/lib/api/withAuth";
 
-export async function GET(req: Request) {
+export const GET = withAuth(async (user, req: Request) => {
   const { searchParams } = new URL(req.url);
 
   const from = searchParams.get("from");
@@ -14,6 +15,8 @@ export async function GET(req: Request) {
     if (from) where.createdAt.gte = new Date(from);
     if (to) where.createdAt.lte = new Date(to);
   }
+
+  where.restaurantId = user.restaurantId;
 
   const orders = await prisma.order.findMany({
     where,
@@ -28,7 +31,7 @@ export async function GET(req: Request) {
   });
 
   return NextResponse.json(orders);
-}
+});
 
 export async function POST(req: Request) {
   const body = await req.json();

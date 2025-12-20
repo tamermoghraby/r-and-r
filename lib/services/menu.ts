@@ -24,9 +24,11 @@ export async function createMenuItem(data: {
   description?: string;
   image?: string;
   ingredients?: { ingredientId: string; quantityRequired: string | number }[];
+  user?: { restaurantId: string };
 }) {
   return prisma.menuItem.create({
     data: {
+      restaurantId: data.user?.restaurantId || "",
       name: data.name,
       price: new Decimal(data.price),
       description: data.description,

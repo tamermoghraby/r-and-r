@@ -28,8 +28,8 @@ export * from "./enums.ts";
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Ingredients
- * const ingredients = await prisma.ingredient.findMany()
+ * // Fetch zero or more Restaurants
+ * const restaurants = await prisma.restaurant.findMany()
  * ```
  *
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,6 +42,16 @@ export type PrismaClient<
 > = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>;
 export { Prisma };
 
+/**
+ * Model Restaurant
+ *
+ */
+export type Restaurant = Prisma.RestaurantModel;
+/**
+ * Model User
+ *
+ */
+export type User = Prisma.UserModel;
 /**
  * Model Ingredient
  *
@@ -82,8 +92,3 @@ export type Expense = Prisma.ExpenseModel;
  *
  */
 export type Purchase = Prisma.PurchaseModel;
-/**
- * Model User
- *
- */
-export type User = Prisma.UserModel;

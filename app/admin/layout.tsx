@@ -1,36 +1,27 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import Sidebar from "./_components/Sidebar";
-import Header from "./_components/Header";
+import prisma from "@/lib/prisma";
+import AdminShell from "./_components/AdminShell";
 import { ToastProvider } from "@/components/Toast";
+import { requireAuth } from "@/lib/auth/requireAuth";
 
-export default function AdminLayout({ children }) {
-  const [collapsed, setCollapsed] = useState(false);
+export default async function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const user = await requireAuth();
 
-  useEffect(() => {
-    const saved = localStorage.getItem("sidebar-collapsed");
-    if (saved) setCollapsed(saved === "true");
-  }, []);
+  const fullUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    include: { restaurant: true },
+  });
 
-  const toggleSidebar = () => {
-    setCollapsed((prev) => {
-      const newValue = !prev;
-      localStorage.setItem("sidebar-collapsed", String(newValue));
-      return newValue;
-    });
-  };
+  if (!fullUser) {
+    throw new Error("User not found");
+  }
 
   return (
     <ToastProvider>
-      <div className="flex bg-white text-black">
-        <Sidebar collapsed={collapsed} />
-
-        <div className="flex-1 flex flex-col">
-          <Header onToggleSidebar={toggleSidebar} />
-          <div className="p-6">{children}</div>
-        </div>
-      </div>
+      <AdminShell user={fullUser}>{children}</AdminShell>
     </ToastProvider>
   );
 }

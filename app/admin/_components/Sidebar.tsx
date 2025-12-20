@@ -1,25 +1,38 @@
 "use client";
 
-import Link from "next/link";
 import SidebarItem from "./SidebarItem";
 import {
   FiBox,
   FiShoppingBag,
-  FiFileText,
   FiList,
   FiDollarSign,
   FiBarChart2,
 } from "react-icons/fi";
 
-export default function Sidebar({ collapsed }) {
+export default function Sidebar({
+  collapsed,
+  restaurantName,
+}: {
+  collapsed: boolean;
+  restaurantName: string;
+}) {
   return (
     <div
-      className={`bg-gray-200 border-r h-full min-h-screen transition-all duration-300 ${
+      className={`bg-gray-200 border-r transition-all duration-300 ${
         collapsed ? "w-16" : "w-56"
       }`}
     >
       <div className="h-16 flex items-center justify-center border-b">
-        {!collapsed ? <h1 className="font-bold text-xl">Admin</h1> : "A"}
+        {!collapsed ? (
+          <div className="text-center">
+            <div className="font-bold text-sm">Restaurant</div>
+            <div className="text-xs text-gray-600 truncate">
+              {restaurantName}
+            </div>
+          </div>
+        ) : (
+          "R"
+        )}
       </div>
 
       <div className="flex flex-col gap-2 mt-4">
