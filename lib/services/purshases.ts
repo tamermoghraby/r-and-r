@@ -8,7 +8,8 @@ export async function addPurchase(
   ingredientId: string,
   quantity: string | number,
   totalCost: string | number,
-  note?: string
+  note?: string,
+  user?: any
 ) {
   const q = new Decimal(quantity);
   const cost = new Decimal(totalCost);
@@ -26,6 +27,7 @@ export async function addPurchase(
         quantity: q,
         totalCost: cost,
         note,
+        restaurantId: user.restaurantId,
       },
     });
 

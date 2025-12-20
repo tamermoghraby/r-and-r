@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { withAuth } from "@/lib/api/withAuth";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -25,7 +26,7 @@ export async function GET(req: Request) {
   return NextResponse.json(expenses);
 }
 
-export async function POST(req: Request) {
+export const POST = withAuth(async (user, req: Request) => {
   const body = await req.json();
   const { description, amount, category, expenseDate } = body;
 
@@ -42,8 +43,9 @@ export async function POST(req: Request) {
       amount,
       category,
       expenseDate: expenseDate ? new Date(expenseDate) : undefined,
+      restaurantId: user.restaurantId,
     },
   });
 
   return NextResponse.json(expense);
-}
+});

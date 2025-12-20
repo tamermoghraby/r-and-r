@@ -33,9 +33,9 @@ export const GET = withAuth(async (user, req: Request) => {
   return NextResponse.json(orders);
 });
 
-export async function POST(req: Request) {
+export const POST = withAuth(async (user, req: Request) => {
   const body = await req.json();
   const note = body.note || "";
-  const order = await createOrder(body.items, note);
+  const order = await createOrder(body.items, note, user);
   return NextResponse.json(order);
-}
+});

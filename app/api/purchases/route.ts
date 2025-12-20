@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { adjustIngredientStock } from "@/lib/services/ingredients";
+import { withAuth } from "@/lib/api/withAuth";
 
-export async function POST(req: Request) {
+export const POST = withAuth(async (user, req: Request) => {
   try {
     const body = await req.json();
     const { ingredientId, quantity, totalCost, note } = body;
@@ -31,6 +32,7 @@ export async function POST(req: Request) {
         quantity: qty,
         totalCost: cost,
         note: note || null,
+        restaurantId: user.restaurantId,
       },
     });
 
@@ -47,7 +49,7 @@ export async function POST(req: Request) {
     console.error(e);
     return NextResponse.json({ error: (e as Error).message }, { status: 500 });
   }
-}
+});
 
 export async function GET() {
   const purchases = await prisma.purchase.findMany({
