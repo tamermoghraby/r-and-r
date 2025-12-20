@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { adjustIngredientStock } from "@/lib/services/ingredients";
 import { withAuth } from "@/lib/api/withAuth";
+import restaurantWhere from "@/lib/utils/restaurantScope";
 
 export const POST = withAuth(async (user, req: Request) => {
   try {
@@ -41,7 +42,9 @@ export const POST = withAuth(async (user, req: Request) => {
       ingredientId,
       qty,
       "purchase",
-      note || "Ingredient purchase"
+      note || "Ingredient purchase",
+      undefined,
+      user
     );
 
     return NextResponse.json({ success: true, purchase });
@@ -51,11 +54,12 @@ export const POST = withAuth(async (user, req: Request) => {
   }
 });
 
-export async function GET() {
+export const GET = withAuth(async (user, req: Request) => {
   const purchases = await prisma.purchase.findMany({
+    where: { ...restaurantWhere(user) },
     include: { ingredient: true },
     orderBy: { createdAt: "desc" },
   });
 
   return NextResponse.json(purchases);
-}
+});

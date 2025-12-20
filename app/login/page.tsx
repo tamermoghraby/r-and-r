@@ -38,7 +38,7 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-xl shadow-sm w-full max-w-md space-y-4"
       >
-        <h1 className="text-2xl font-semibold">Admin Login</h1>
+        <h1 className="text-2xl text-black font-semibold">Admin Login</h1>
 
         {error && <div className="text-red-600 text-sm">{error}</div>}
 

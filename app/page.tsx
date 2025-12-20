@@ -10,7 +10,7 @@ export default async function Home() {
   const kaakeItems = [
     {
       name: "Double Cheese",
-      price: "220,000",
+      price: "250,000",
       description: "Mozzarella, Aakawi",
       image: "/assets/images/double-cheese.jpg",
     },

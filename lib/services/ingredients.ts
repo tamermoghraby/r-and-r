@@ -55,7 +55,7 @@ export async function adjustIngredientStock(
   const amt = changeAmount;
   return prisma.$transaction(async (tx) => {
     const ing = await tx.ingredient.update({
-      where: { id: ingredientId, ...restaurantWhere(user.restaurantId) },
+      where: { id: ingredientId, ...restaurantWhere(user) },
       data: {
         currentQuantity: { increment: amt },
       },

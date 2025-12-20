@@ -10,17 +10,20 @@ export async function POST(req: Request) {
 
   const passwordHash = await bcrypt.hash(password, 10);
 
-  const restaurant = await prisma.restaurant.create({
-    data: { name: restaurantName },
-  });
+  let restaurant = null;
 
+  if (restaurantName) {
+    restaurant = await prisma.restaurant.create({
+      data: { name: restaurantName },
+    });
+  }
   const user = await prisma.user.create({
     data: {
       username,
       email,
       passwordHash,
       role: "owner",
-      restaurantId: restaurant.id,
+      restaurantId: restaurant.id ?? undefined,
     },
   });
 
@@ -29,7 +32,7 @@ export async function POST(req: Request) {
   session.user = {
     id: user.id,
     role: user.role as any,
-    restaurantId: restaurant.id,
+    restaurantId: restaurant.id ?? undefined,
   };
   await session.save();
 
