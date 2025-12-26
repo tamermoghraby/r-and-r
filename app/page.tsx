@@ -62,7 +62,7 @@ export default async function Home() {
   const wrapItems = [
     {
       name: "Boneless Wrap",
-      price: "450,000",
+      price: "500,000",
       description:
         "Tortilla Wrap, Mozzarella, Iceberg, Sticks, Honey Mustard, Barbecue, Ranch Sauce, Cheddar Cheese",
       image: "/assets/images/boneless-new.jpg",
@@ -89,7 +89,7 @@ export default async function Home() {
     // },
     {
       name: "Burger Wrap",
-      price: "450,000",
+      price: "500,000",
       description:
         "Tortilla Wrap, 2 Burger patty, Fries, Mozzarella, Iceberg, Tomato, Kethup, Cocktail Sauce",
       image: "/assets/images/burger-new.jpg",
