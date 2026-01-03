@@ -129,7 +129,7 @@ export default async function Home() {
     },
     {
       name: "Loaded Fries",
-      price: "450,000",
+      price: "500,000",
       description:
         "Fries, Chicken Strips, Barbecue Sauce, Ranch Sauce, Honey Mustard, Cheddar Cheese",
       image: "/assets/images/loaded-fries-new.jpg",
