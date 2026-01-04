@@ -1,5 +1,3 @@
-import { requireAuth } from "@/lib/auth/requireAuth";
-
 export default async function AdminHome() {
   return (
     <div>
