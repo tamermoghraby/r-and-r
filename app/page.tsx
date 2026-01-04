@@ -129,7 +129,7 @@ export default async function Home() {
     },
     {
       name: "Loaded Fries",
-      price: "450,000",
+      price: "500,000",
       description:
         "Fries, Chicken Strips, Barbecue Sauce, Ranch Sauce, Honey Mustard, Cheddar Cheese",
       image: "/assets/images/loaded-fries-new.jpg",
@@ -158,7 +158,7 @@ export default async function Home() {
           alt="R and R Logo"
           width={500}
           height={500}
-          src={"/assets/images/logo.PNG"}
+          src={"/assets/images/randos-logo.jpg"}
           className="w-full md:h-96"
         />
         <div className="h-[50%] bg-gradient-to-b from-transparent  to-bg1 absolute -bottom-[2px] left-0 right-0" />
