@@ -61,6 +61,12 @@ export default async function Home() {
 
   const wrapItems = [
     {
+      name: "Fajita Wrap",
+      price: "550,000",
+      description: "Chicken fajita, Mozzarella, Iceberg lettuce, House sauce.",
+      image: "/assets/images/chicken-fajita.jpg",
+    },
+    {
       name: "Boneless Wrap",
       price: "500,000",
       description:
