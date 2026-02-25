@@ -10,7 +10,7 @@ const MenuItem = ({ name, price, description, image }) => {
       whileInView={{ opacity: 1, x: 0, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
       // viewport={{ once: true }}
-      className="bg-[#084d5a]/40 p-1 rounded-2xl border border-white/5 shadow-md shadow-[#fbbf24] hover:border-[#fbbf24]/50 transition-all shadow-lg"
+      className="bg-[#084d5a]/40 rounded-2xl border border-white/5 shadow-md shadow-[#fbbf24] hover:border-[#fbbf24]/50 transition-all overflow-hidden"
       //   className="overflow-hidden bg-gradient-to-br from-menuBottom to-menuBottom rounded-xl
       //  shadow-md shadow-primary/50 text-white"
     >
