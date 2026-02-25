@@ -31,7 +31,9 @@ const MenuItem = ({ name, price, description, image }) => {
       <div className="pb-2 rounded-t-xl pt-4 px-2">
         {/* <p className="tracking-widest text-sm uppercase min-h-10">{name}</p> */}
         {price && (
-          <p className=" tracking-widest text-xl font-bold mt-6">{price} LL</p>
+          <p className=" tracking-widest text-white text-xl font-bold mt-6">
+            {price} LL
+          </p>
         )}
         <p className="mt-2 font-light text-xs text-gray-300">{description}</p>
       </div>
