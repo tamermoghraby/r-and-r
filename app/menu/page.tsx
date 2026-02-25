@@ -1,12 +1,11 @@
+"use client";
 import Footer from "@/components/Footer";
 import MenuItem from "@/components/MenuItem";
-import MotionDiv from "@/components/MotionDiv";
-import { createIngredient } from "@/lib/services/ingredients";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 
-export default async function Home() {
+export default function Home() {
   const kaakeItems = [
     {
       name: "Double Cheese",
@@ -86,13 +85,6 @@ export default async function Home() {
       description: "Tortilla Wrap, Pepperoni, Mozzarella, Oregano, Ketchup",
       image: "/assets/images/pizza-wrap-new.jpg",
     },
-    // {
-    //   name: "Hotdog Wrap",
-    //   price: "450,000",
-    //   description:
-    //     "Tortilla wrap, Hotdog, Mozzarella, Chips, Ketchup, Mayonnaise, Mustard, Barbecue, Cheddar, Corn",
-    //   image: "/assets/images/hotdog-wrap.jpg",
-    // },
     {
       name: "Burger Wrap",
       price: "500,000",
@@ -157,112 +149,109 @@ export default async function Home() {
     },
   ];
 
+  const sections = [
+    { title: "Kaake", data: kaakeItems },
+    { title: "Ramadan Wraps", data: wrapItems },
+    { title: "Appetizers", data: appetizers },
+    { title: "Cold Beverages", data: coldBeverages },
+  ];
+
   return (
-    <main className="flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1 overflow-x-hidden">
-      <div className="relative h-fit">
-        <Image
-          alt="R and R Logo"
-          width={500}
-          height={500}
-          src={"/assets/images/randos-logo.jpg"}
-          className="w-full md:h-96"
-        />
-        <div className="h-[50%] bg-gradient-to-b from-transparent  to-bg1 absolute -bottom-[2px] left-0 right-0" />
+    <main className="flex min-h-screen flex-col bg-[#062844] overflow-x-hidden relative font-sans">
+      {/* Background Texture Pattern */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/islamic-art.png')]" />
+
+      {/* TOP SECTION: The Islamic Arch & Header */}
+      <div className="relative w-full h-[450px] flex items-center justify-center pt-10 px-6">
+        {/* Decorative Hanging Lanterns */}
+        <div className="absolute top-0 left-10 md:left-20 animate-bounce duration-[3000ms]">
+          <span className="text-5xl drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">
+            🏮
+          </span>
+          <div className="w-[2px] h-20 bg-yellow-600/50 mx-auto -mt-2" />
+        </div>
+        <div className="absolute top-0 right-10 md:right-20 animate-bounce duration-[4000ms]">
+          <span className="text-5xl drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">
+            🏮
+          </span>
+          <div className="w-[2px] h-20 bg-yellow-600/50 mx-auto -mt-2" />
+        </div>
+
+        {/* The Arch Frame */}
+        <div className="relative w-full max-w-2xl h-full border-t-4 border-l-4 border-r-4 border-yellow-500/30 rounded-t-[150px] md:rounded-t-[250px] flex flex-col items-center justify-center bg-gradient-to-b from-[#084d5a] to-transparent shadow-[0_-20px_50px_rgba(0,0,0,0.3)]">
+          <Image
+            alt="R and R Logo"
+            width={180}
+            height={180}
+            src={"/assets/images/randos-logo.jpg"}
+            className="rounded-full border-4 border-[#fbbf24] shadow-xl mb-6"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+          >
+            <h1 className="text-[#fbbf24] text-5xl md:text-7xl font-serif text-center italic drop-shadow-md">
+              Ramadan Kareem
+            </h1>
+            <p className="text-white/60 text-center tracking-[0.4em] mt-4 uppercase text-sm">
+              Deliciously Blessed
+            </p>
+          </motion.div>
+        </div>
       </div>
 
-      <div className="py-8 px-4">
-        <MotionDiv>
-          <div className="flex gap-4 justify-between items-center">
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4" />
-            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4">
-              KAAKE
-            </p>
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4" />
+      {/* MENU CONTENT SECTION */}
+      <div className="relative py-8 px-4 z-20 -mt-10">
+        {sections.map((section) => (
+          <div key={section.title} className="mb-16">
+            <motion.div>
+              <div className="flex gap-4 justify-between items-center mb-10">
+                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-[#fbbf24]" />
+                <div className="flex items-center gap-2">
+                  <span className="text-[#fbbf24]">✦</span>
+                  <h2 className="text-[#fbbf24] tracking-[0.2em] text-2xl md:text-3xl font-bold uppercase">
+                    {section.title}
+                  </h2>
+                  <span className="text-[#fbbf24]">✦</span>
+                </div>
+                <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#fbbf24]" />
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {section.data.map((item) => (
+                <motion.div key={item.name} whileHover={{ y: -5 }}>
+                  <MenuItem
+                    name={item.name}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </MotionDiv>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {kaakeItems.map((item) => (
-            <MenuItem
-              key={item.name}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
-          ))}
-        </div>
-        <MotionDiv>
-          <div className="flex gap-4 justify-between items-center">
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
-            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
-              WRAPS
-            </p>
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
-          </div>
-        </MotionDiv>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {wrapItems.map((item) => (
-            <MenuItem
-              key={item.name}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
-          ))}
-        </div>
-        <MotionDiv>
-          <div className="flex gap-4 justify-between items-center">
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
-            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
-              APPETIZERS
-            </p>
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
-          </div>
-        </MotionDiv>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {appetizers.map((item) => (
-            <MenuItem
-              key={item.name}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
-          ))}
-        </div>
-        <MotionDiv>
-          <div className="flex gap-4 justify-between items-center">
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
-            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
-              COLD BEVERAGES
-            </p>
-            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
-          </div>
-        </MotionDiv>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {coldBeverages.map((item) => (
-            <MenuItem
-              key={item.name}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
-          ))}
-        </div>
+        ))}
       </div>
+
       <Footer />
 
+      {/* STICKY ORDER BUTTON: Theme Matched */}
       <Link
         href={
           "https://wa.me/70381621?text=" +
-          encodeURIComponent("Hello, can i place an order?")
+          encodeURIComponent("Ramadan Kareem! I'd like to place an order.")
         }
         target="_blank"
-        className="bg-gradient-to-br from-primary via-primary to-orange-700 font-bold p-4 rounded-xl fixed bottom-4 left-4 right-4 shadow-md shadow-primary/60 text-center text-white tracking-widest hover:opacity-95"
+        className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] md:w-[400px] z-50 group"
       >
-        Order Now
+        <div className="bg-gradient-to-r from-[#b45309] via-[#fbbf24] to-[#b45309] p-[2px] rounded-full shadow-[0_10px_30px_rgba(180,83,9,0.5)]">
+          <div className="bg-[#062844] group-hover:bg-transparent transition-colors rounded-full py-4 px-8 flex items-center justify-center gap-3">
+            <span className="text-[#fbbf24] group-hover:text-[#062844] text-xl font-bold uppercase tracking-widest transition-colors">
+              Place Your Order 🌙
+            </span>
+          </div>
+        </div>
       </Link>
     </main>
   );
