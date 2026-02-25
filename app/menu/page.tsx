@@ -75,7 +75,7 @@ export default async function Home() {
     },
     {
       name: "Tawook Wrap",
-      price: "500,000",
+      price: "550,000",
       description:
         "Tortilla Wrap, Tawouk, Cheese, Iceberg, Corn, Turkey, Fries, Special randr sauce",
       image: "/assets/images/tawook-wrap.webp",
@@ -111,7 +111,7 @@ export default async function Home() {
   const appetizers = [
     {
       name: "Fries",
-      price: "150,000",
+      price: "200,000",
       description: "Fries + Ketchup",
       image: "/assets/images/fries.jpg",
     },
