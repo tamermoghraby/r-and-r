@@ -70,14 +70,14 @@ export default function Home() {
       price: "500,000",
       description:
         "Tortilla Wrap, Mozzarella, Iceberg, Sticks, Honey Mustard, Barbecue, Ranch Sauce, Cheddar Cheese",
-      image: "/assets/images/boneless-new.jpg",
+      image: "/assets/images/boneless-wrap.jpg",
     },
     {
       name: "Tawook Wrap",
       price: "550,000",
       description:
         "Tortilla Wrap, Tawouk, Cheese, Iceberg, Corn, Turkey, Fries, Special randr sauce",
-      image: "/assets/images/tawook-wrap.webp",
+      image: "/assets/images/tawook-wrap.jpg",
     },
     {
       name: "Pepperoni Pizza Wrap",
