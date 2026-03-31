@@ -171,7 +171,7 @@ export default function Home() {
           <motion.div
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            className="relative"
+            // className="relative"
           >
             <div className="absolute inset-0 rounded-2xl bg-orange-500 blur-2xl opacity-20 animate-pulse"></div>
             <Image
@@ -187,14 +187,17 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-center"
+
+            // className="text-center"
           >
-            <h1 className="text-orange-500 text-6xl md:text-8xl font-black italic tracking-tighter uppercase">
-              RANDO&apos;S
-            </h1>
-            <p className="text-white font-bold tracking-[0.4em] uppercase text-xs md:text-sm opacity-80">
-              Street Food • Hot & Fresh
-            </p>
+            <span className="text-center">
+              <h1 className="text-orange-500 text-6xl md:text-8xl font-black italic tracking-tighter uppercase">
+                RANDO&apos;S
+              </h1>
+              <p className="text-white font-bold tracking-[0.4em] uppercase text-xs md:text-sm opacity-80">
+                Street Food • Hot & Fresh
+              </p>
+            </span>
           </motion.div>
         </div>
       </div>
