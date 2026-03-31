@@ -151,7 +151,7 @@ export default function Home() {
 
   const sections = [
     { title: "Kaake", data: kaakeItems },
-    { title: "Ramadan Wraps", data: wrapItems },
+    { title: "Wraps", data: wrapItems },
     { title: "Appetizers", data: appetizers },
     { title: "Cold Beverages", data: coldBeverages },
   ];
