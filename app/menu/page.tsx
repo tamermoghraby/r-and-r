@@ -157,77 +157,68 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#062844] overflow-x-hidden relative font-sans">
-      {/* Background Texture Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/islamic-art.png')]" />
+    <main className="flex min-h-screen flex-col bg-[#0f0f0f] overflow-x-hidden relative font-sans text-white">
+      {/* Background Texture */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-900/20 via-transparent to-black pointer-events-none" />
 
-      {/* TOP SECTION: The Islamic Arch & Header */}
-      <div className="relative w-full h-[450px] flex items-center justify-center pt-10 px-6">
-        {/* Decorative Hanging Lanterns */}
-        <div className="absolute top-0 left-10 md:left-20 animate-bounce duration-[3000ms]">
-          <span className="text-5xl drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">
-            🏮
-          </span>
-          <div className="w-[2px] h-20 bg-yellow-600/50 mx-auto -mt-2" />
-        </div>
-        <div className="absolute top-0 right-10 md:right-20 animate-bounce duration-[4000ms]">
-          <span className="text-5xl drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">
-            🏮
-          </span>
-          <div className="w-[2px] h-20 bg-yellow-600/50 mx-auto -mt-2" />
-        </div>
+      {/* HERO SECTION */}
+      <div className="relative w-full h-[450px] flex items-center justify-center pt-10 px-6 overflow-hidden">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-orange-600 rounded-full blur-[100px] animate-pulse opacity-20" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-600 rounded-full blur-[120px] animate-pulse delay-700 opacity-20" />
 
-        {/* The Arch Frame */}
-        <div className="relative w-full max-w-2xl h-full border-t-4 border-l-4 border-r-4 border-yellow-500/30 rounded-t-[150px] md:rounded-t-[250px] flex flex-col items-center justify-center bg-gradient-to-b from-[#084d5a] to-transparent shadow-[0_-20px_50px_rgba(0,0,0,0.3)]">
-          <Image
-            alt="R and R Logo"
-            width={180}
-            height={180}
-            src={"/assets/images/randos-logo.jpg"}
-            className="rounded-full border-4 border-[#fbbf24] shadow-xl mb-6"
-          />
+        <div className="relative z-10 flex flex-col items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="relative"
           >
-            <h1 className="text-[#fbbf24] text-5xl md:text-7xl font-serif text-center italic drop-shadow-md">
-              Ramadan Kareem
+            <div className="absolute inset-0 rounded-2xl bg-orange-500 blur-2xl opacity-20 animate-pulse"></div>
+            <Image
+              alt="Rando's Street Food Logo"
+              width={200}
+              height={200}
+              src={"/assets/images/randos-logo.jpg"}
+              className="relative rounded-2xl border-2 border-orange-500/50 shadow-2xl mb-6"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="text-center"
+          >
+            <h1 className="text-orange-500 text-6xl md:text-8xl font-black italic tracking-tighter uppercase">
+              RANDO'S
             </h1>
-            <p className="text-white/60 text-center tracking-[0.4em] mt-4 uppercase text-sm">
-              Deliciously Blessed
+            <p className="text-white font-bold tracking-[0.4em] uppercase text-xs md:text-sm opacity-80">
+              Street Food • Hot & Fresh
             </p>
           </motion.div>
         </div>
       </div>
 
-      {/* MENU CONTENT SECTION */}
-      <div className="relative py-8 px-4 z-20 -mt-10">
+      {/* MENU GRID */}
+      <div className="relative py-4 px-4 z-20 max-w-6xl mx-auto w-full">
         {sections.map((section) => (
           <div key={section.title} className="mb-16">
-            <motion.div>
-              <div className="flex gap-4 justify-between items-center mb-10">
-                <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent to-[#fbbf24]" />
-                <div className="flex items-center gap-2">
-                  <span className="text-[#fbbf24]">✦</span>
-                  <h2 className="text-[#fbbf24] tracking-[0.2em] text-2xl md:text-3xl font-bold uppercase">
-                    {section.title}
-                  </h2>
-                  <span className="text-[#fbbf24]">✦</span>
-                </div>
-                <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent to-[#fbbf24]" />
-              </div>
-            </motion.div>
+            <div className="flex items-center gap-4 mb-8">
+              <h2 className="text-white text-2xl md:text-4xl font-black uppercase italic skew-x-[-10deg] border-l-4 border-orange-600 pl-4">
+                {section.title}
+              </h2>
+              <div className="flex-1 h-[1px] bg-white/10" />
+            </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.data.map((item) => (
-                <motion.div key={item.name} whileHover={{ y: -5 }}>
-                  <MenuItem
-                    name={item.name}
-                    price={item.price}
-                    description={item.description}
-                    image={item.image}
-                  />
-                </motion.div>
+                <MenuItem
+                  key={item.name}
+                  name={item.name}
+                  price={item.price}
+                  description={item.description}
+                  image={item.image}
+                />
               ))}
             </div>
           </div>
@@ -236,21 +227,20 @@ export default function Home() {
 
       <Footer />
 
-      {/* STICKY ORDER BUTTON: Theme Matched */}
+      {/* REFINED FLOATING ACTION BUTTON */}
       <Link
         href={
           "https://wa.me/70381621?text=" +
-          encodeURIComponent("Ramadan Kareem! I'd like to place an order.")
+          encodeURIComponent("Hi Rando's! I'd like to place an order.")
         }
         target="_blank"
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] md:w-[400px] z-50 group"
+        className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-all hover:scale-105 active:scale-95"
       >
-        <div className="bg-gradient-to-r from-[#b45309] via-[#fbbf24] to-[#b45309] p-[2px] rounded-full shadow-[0_10px_30px_rgba(180,83,9,0.5)]">
-          <div className="bg-[#062844] group-hover:bg-transparent transition-colors rounded-full py-4 px-8 flex items-center justify-center gap-3">
-            <span className="text-[#fbbf24] group-hover:text-[#062844] text-xl font-bold uppercase tracking-widest transition-colors">
-              Place Your Order 🌙
-            </span>
-          </div>
+        <div className="bg-orange-600 text-white px-6 py-3 rounded-full flex items-center gap-3 shadow-[0_10px_30px_rgba(234,88,12,0.5)] border border-white/20">
+          <span className="text-xl">🔥</span>
+          <span className="font-black uppercase tracking-wider text-sm md:text-base whitespace-nowrap">
+            Order Now: 70 381 621
+          </span>
         </div>
       </Link>
     </main>
