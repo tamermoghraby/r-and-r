@@ -190,7 +190,7 @@ export default function Home() {
             className="text-center"
           >
             <h1 className="text-orange-500 text-6xl md:text-8xl font-black italic tracking-tighter uppercase">
-              RANDO'S
+              RANDO&apos;S
             </h1>
             <p className="text-white font-bold tracking-[0.4em] uppercase text-xs md:text-sm opacity-80">
               Street Food • Hot & Fresh

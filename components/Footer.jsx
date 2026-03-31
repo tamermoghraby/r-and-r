@@ -52,7 +52,7 @@ const Footer = () => {
       </div>
 
       <p className="mt-12 text-gray-500 text-[10px] uppercase tracking-widest font-bold">
-        Rando's Street Food • Kafar Selouan
+        Rando&apos;s Street Food • Kafar Selouan
       </p>
     </footer>
   );
