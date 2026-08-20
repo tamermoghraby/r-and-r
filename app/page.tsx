@@ -102,6 +102,16 @@ export default async function Home() {
     },
   ];
 
+  const seafoodItems = [
+    {
+      name: "Sea King",
+      price: "600,000",
+      description:
+        "TGrilled Shrimp & Crab • Signature Tartar • Fresh Iceberg • Pickles",
+      image: "/assets/images/crab-shrimps.jpg",
+    },
+  ];
+
   const appetizers = [
     {
       name: "Fries",
@@ -196,6 +206,26 @@ export default async function Home() {
         </MotionDiv>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {wrapItems.map((item) => (
+            <MenuItem
+              key={item.name}
+              name={item.name}
+              price={item.price}
+              description={item.description}
+              image={item.image}
+            />
+          ))}
+        </div>
+        <MotionDiv>
+          <div className="flex gap-4 justify-between items-center">
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+            <p className="text-primary  tracking-widest text-4xl font-rubik mb-4 mt-16">
+              🦐 SEAFOOD SUBS
+            </p>
+            <div className="flex-1 border-t-2 border-primary border-dotted mb-4 mt-16" />
+          </div>
+        </MotionDiv>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {seafoodItems.map((item) => (
             <MenuItem
               key={item.name}
               name={item.name}

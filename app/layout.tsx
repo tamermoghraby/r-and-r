@@ -5,6 +5,7 @@ import {
   Knewave,
 } from "next/font/google";
 import "./globals.css";
+import { ToastProvider } from "@/components/Toast";
 
 const inter = Inter({ subsets: ["latin"] });
 const rubikGemstones = Rubik_Gemstones({
@@ -32,8 +33,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${inter.className} ${rubikGemstones.variable} ${rubikPuddles.variable}`}
       >
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
       </body>
     </html>
   );
 }
+
