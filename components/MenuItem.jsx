@@ -6,33 +6,43 @@ import { motion } from "framer-motion";
 const MenuItem = ({ name, price, description, image }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20, scale: 0.8 }}
-      whileInView={{ opacity: 1, x: 0, scale: 1 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
-      // viewport={{ once: true }}
-      className="overflow-hidden bg-gradient-to-br from-menuBottom to-menuBottom rounded-xl
-     shadow-md shadow-primary/50 text-white"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true }}
+      className="group relative bg-[#1a1a1a] rounded-xl border border-white/10 overflow-hidden hover:border-orange-500/50 transition-all duration-300 shadow-xl"
     >
-      <div className="relative">
+      {/* Food Image Container */}
+      <div className="relative h-48 w-full overflow-hidden">
         <Image
           width={500}
           height={500}
-          className="w-full h-40 object-cover object-center rounded-b-xl"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           src={image}
-          alt="menu item"
+          alt={name}
         />
-        <div className="h-[20%] absolute -bottom-[2px] right-0 left-0 bg-gradient-to-b from-transparent via-menuBottom/90 to-menuBottom">
-          <p className="text-center mt-4 tracking-wider text-md uppercase bg-white text-bg1 font-bold rounded-b-lg">
-            {name}
-          </p>
-        </div>
-      </div>
-      <div className="pb-2 rounded-t-xl pt-4 px-2">
-        {/* <p className="tracking-widest text-sm uppercase min-h-10">{name}</p> */}
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent" />
+        
+        {/* Price Tag - Floating Badge Style */}
         {price && (
-          <p className=" tracking-widest text-xl font-bold mt-6">{price} LL</p>
+          <div className="absolute top-3 right-3 bg-orange-600 text-white font-black px-3 py-1 rounded-md skew-x-[-12deg] shadow-lg text-sm">
+            {price} LL
+          </div>
         )}
-        <p className="mt-2 font-light text-xs text-gray-300">{description}</p>
+      </div>
+
+      {/* Content */}
+      <div className="p-4 relative">
+        <h3 className="text-orange-500 font-black uppercase italic tracking-tighter text-xl mb-1 group-hover:text-white transition-colors">
+          {name}
+        </h3>
+        <p className="text-gray-400 text-xs leading-relaxed line-clamp-2 font-medium">
+          {description}
+        </p>
+        
+        {/* Bottom Accent Line */}
+        <div className="mt-4 h-1 w-0 bg-orange-600 group-hover:w-full transition-all duration-500" />
       </div>
     </motion.div>
   );

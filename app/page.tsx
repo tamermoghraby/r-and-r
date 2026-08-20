@@ -65,7 +65,14 @@ export default async function Home() {
       price: "500,000",
       description:
         "Tortilla Wrap, Mozzarella, Iceberg, Sticks, Honey Mustard, Barbecue, Ranch Sauce, Cheddar Cheese",
-      image: "/assets/images/boneless-new.jpg",
+      image: "/assets/images/boneless-wrap.jpg",
+    },
+    {
+      name: "Tawook Wrap",
+      price: "550,000",
+      description:
+        "Tortilla Wrap, Tawouk, Cheese, Iceberg, Corn, Turkey, Fries, Special randr sauce",
+      image: "/assets/images/tawook-wrap.jpg",
     },
     {
       name: "Pepperoni Pizza Wrap",
@@ -98,7 +105,7 @@ export default async function Home() {
   const appetizers = [
     {
       name: "Fries",
-      price: "150,000",
+      price: "200,000",
       description: "Fries + Ketchup",
       image: "/assets/images/fries.jpg",
     },
@@ -144,13 +151,6 @@ export default async function Home() {
     },
   ];
 
-  await createIngredient({
-    name: "Chicken Crispey",
-    unit: "kg",
-    initialQuantity: "50",
-    costPerUnit: "15",
-  });
-
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-br from-bg1 to-bg1 overflow-x-hidden">
       <div className="relative h-fit">
@@ -158,7 +158,7 @@ export default async function Home() {
           alt="R and R Logo"
           width={500}
           height={500}
-          src={"/assets/images/logo.PNG"}
+          src={"/assets/images/randos-logo.jpg"}
           className="w-full md:h-96"
         />
         <div className="h-[50%] bg-gradient-to-b from-transparent  to-bg1 absolute -bottom-[2px] left-0 right-0" />

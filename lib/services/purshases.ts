@@ -1,12 +1,15 @@
 // app/services/purchases.ts
-import { Decimal } from "@prisma/client/runtime/index-browser";
+"use server";
+import { Prisma } from "@/app/generated/prisma/client";
+const Decimal = Prisma.Decimal;
 import prisma from "../prisma";
 
 export async function addPurchase(
   ingredientId: string,
   quantity: string | number,
   totalCost: string | number,
-  note?: string
+  note?: string,
+  user?: any
 ) {
   const q = new Decimal(quantity);
   const cost = new Decimal(totalCost);
@@ -24,6 +27,7 @@ export async function addPurchase(
         quantity: q,
         totalCost: cost,
         note,
+        restaurantId: user.restaurantId,
       },
     });
 

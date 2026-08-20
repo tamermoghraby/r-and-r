@@ -13,16 +13,49 @@ datasource db {
   provider = "postgresql"
 }
 
+model Restaurant {
+  id        String   @id @default(cuid())
+  name      String
+  address   String?
+  phone     String?
+  createdAt DateTime @default(now())
+
+  users       User[]
+  ingredients Ingredient[]
+  menuItems   MenuItem[]
+  orders      Order[]
+  expenses    Expense[]
+  purchases   Purchase[]
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  username     String   @unique
+  passwordHash String
+  role         String   @default("staff") // admin | staff
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  createdAt    DateTime @default(now())
+
+}
+
 model Ingredient {
   id               String                   @id @default(cuid())
-  name             String                   @unique
+  name             String                  
   unit             String // e.g. "g", "kg", "piece", "liter"
   currentQuantity  Decimal                  @default(0) @db.Decimal(20, 6)
   costPerUnit      Decimal                  @db.Decimal(20, 6) // purchase cost per unit
   createdAt        DateTime                 @default(now())
+
+  restaurant       Restaurant               @relation(fields: [restaurantId], references: [id])
+  restaurantId     String                   
+
   stockHistory     IngredientStockHistory[]
   menuItemRequires MenuItemIngredient[]
   purchases        Purchase[]
+
+  @@unique([restaurantId, name])
 }
 
 model IngredientStockHistory {
@@ -37,15 +70,24 @@ model IngredientStockHistory {
   createdAt      DateTime   @default(now())
 }
 
+/* ---------------- MENU ---------------- */
+
 model MenuItem {
-  id          String               @id @default(cuid())
-  name        String               @unique
-  price       Decimal              @db.Decimal(20, 2)
+  id          String   @id @default(cuid())
+  name        String
+  price       Decimal  @db.Decimal(20, 2)
   description String?
   image       String?
-  createdAt   DateTime             @default(now())
-  recipe      MenuItemIngredient[]
-  orderItems  OrderItem[]
+  type        String?
+  createdAt   DateTime @default(now())
+
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+
+  recipe     MenuItemIngredient[]
+  orderItems OrderItem[]
+
+  @@unique([restaurantId, name])
 }
 
 model MenuItemIngredient {
@@ -64,8 +106,12 @@ model Order {
   orderDate                DateTime                 @default(now())
   totalPrice               Decimal                  @db.Decimal(20, 2)
   status                   String                   @default("completed") // completed, cancelled, pending
+  note                     String?                  @default("")
   items                    OrderItem[]
   ingredientStockHistories IngredientStockHistory[]
+  createdAt                DateTime                 @default(now())
+  restaurant               Restaurant               @relation(fields: [restaurantId], references: [id])
+  restaurantId             String
 }
 
 model OrderItem {
@@ -85,6 +131,8 @@ model Expense {
   expenseDate DateTime @default(now())
   category    String?
   createdAt   DateTime @default(now())
+  restaurant  Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
 }
 
 model Purchase {
@@ -95,12 +143,8 @@ model Purchase {
   totalCost    Decimal    @db.Decimal(20, 2)
   note         String?
   createdAt    DateTime   @default(now())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
 }
 
-model User {
-  id           String   @id @default(cuid())
-  username     String   @unique
-  passwordHash String
-  role         String   @default("staff") // admin | staff
-  createdAt    DateTime @default(now())
-}
+

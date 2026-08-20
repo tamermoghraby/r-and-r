@@ -4,13 +4,17 @@ import { Decimal } from "@prisma/client/runtime/index-browser";
 
 type OrderItemInput = { menuItemId: string; quantity: number };
 
-export async function createOrder(items: OrderItemInput[]) {
+export async function createOrder(
+  items: OrderItemInput[],
+  note: string = "",
+  user?: any
+) {
   if (!items || items.length === 0) throw new Error("No items");
 
   // Use a transaction: we must deduct ingredient stock atomically with order creation.
   return prisma.$transaction(async (tx) => {
     // 1) load menu items + their recipe
-    const menuItemIds = items.map(i => i.menuItemId);
+    const menuItemIds = items.map((i) => i.menuItemId);
     const menuItems = await tx.menuItem.findMany({
       where: { id: { in: menuItemIds } },
       include: { recipe: true },
@@ -21,41 +25,51 @@ export async function createOrder(items: OrderItemInput[]) {
     const ingredientUsageMap: Record<string, Decimal> = {};
 
     for (const it of items) {
-      const mi = menuItems.find(m => m.id === it.menuItemId);
+      const mi = menuItems.find((m) => m.id === it.menuItemId);
       if (!mi) throw new Error("Menu item not found: " + it.menuItemId);
       totalPrice = totalPrice.add(new Decimal(mi.price).mul(it.quantity));
       // aggregate ingredient requirements
       for (const r of mi.recipe) {
         const required = new Decimal(r.quantityRequired).mul(it.quantity);
-        if (!ingredientUsageMap[r.ingredientId]) ingredientUsageMap[r.ingredientId] = new Decimal(0);
-        ingredientUsageMap[r.ingredientId] = ingredientUsageMap[r.ingredientId].add(required);
+        if (!ingredientUsageMap[r.ingredientId])
+          ingredientUsageMap[r.ingredientId] = new Decimal(0);
+        ingredientUsageMap[r.ingredientId] =
+          ingredientUsageMap[r.ingredientId].add(required);
       }
     }
 
     // 3) check stock sufficiency
     const ingredientIds = Object.keys(ingredientUsageMap);
-    const ingredients = await tx.ingredient.findMany({ where: { id: { in: ingredientIds } } });
+    const ingredients = await tx.ingredient.findMany({
+      where: { id: { in: ingredientIds } },
+    });
     for (const ing of ingredients) {
       const needed = ingredientUsageMap[ing.id] ?? new Decimal(0);
       if (ing.currentQuantity.lt(needed)) {
-        throw new Error(`Not enough stock for ${ing.name}. Needed ${needed.toString()} ${ing.unit} but have ${ing.currentQuantity.toString()}`);
+        throw new Error(
+          `Not enough stock for ${ing.name}. Needed ${needed.toString()} ${
+            ing.unit
+          } but have ${ing.currentQuantity.toString()}`
+        );
       }
     }
 
     // 4) create order
     const createdOrder = await tx.order.create({
       data: {
+        restaurantId: user.restaurantId,
         totalPrice: totalPrice,
         status: "completed",
+        note: note,
         items: {
-          create: items.map(it => ({
+          create: items.map((it) => ({
             menuItemId: it.menuItemId,
             quantity: it.quantity,
-            unitPrice: menuItems.find(m => m.id === it.menuItemId)!.price,
+            unitPrice: menuItems.find((m) => m.id === it.menuItemId)!.price,
           })),
         },
       },
-      include: { items: true }
+      include: { items: true },
     });
 
     // 5) deduct ingredients and create stock history rows
@@ -71,8 +85,8 @@ export async function createOrder(items: OrderItemInput[]) {
           changeAmount: amt.mul(-1),
           reason: "order_deduction",
           relatedOrderId: createdOrder.id,
-          note: `Deduct for order ${createdOrder.id}`
-        }
+          note: `Deduct for order ${createdOrder.id}`,
+        },
       });
     }
 

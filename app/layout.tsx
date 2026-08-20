@@ -22,8 +22,8 @@ const rubikPuddles = Knewave({
 });
 
 export const metadata = {
-  title: "R & R Menu",
-  description: "Discover our top menu items at R and R!",
+  title: "Rando's Menu",
+  description: "Discover our top menu items at Rando's Street Food!",
 };
 
 export default function RootLayout({ children }) {
