@@ -22,6 +22,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+const MotionDiv = motion.div as any;
+
 // Define TypeScript interfaces for our Cart Items
 interface CartItem {
   name: string;
@@ -370,7 +372,7 @@ export default function Home() {
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-600 rounded-full blur-[120px] animate-pulse delay-700 opacity-20" />
 
         <div className="relative z-10 flex flex-col items-center">
-          <motion.div
+          <MotionDiv
             initial={{ y: -30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
           >
@@ -382,9 +384,9 @@ export default function Home() {
               src={"/assets/images/randos-logo.jpg"}
               className="relative rounded-2xl border-2 border-orange-500/50 shadow-2xl mb-6"
             />
-          </motion.div>
+          </MotionDiv>
 
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -397,7 +399,7 @@ export default function Home() {
                 Street Food • Hot & Fresh
               </p>
             </span>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
 
@@ -442,49 +444,55 @@ export default function Home() {
       <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 w-full max-w-lg px-4 transition-all hover:scale-105 active:scale-95">
         <AnimatePresence mode="wait">
           {totalQty > 0 ? (
-            <motion.button
+            <MotionDiv
               key="cart-active"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              onClick={() => setIsCartOpen(true)}
-              className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white p-4 rounded-full flex items-center justify-between shadow-[0_10px_35px_rgba(234,88,12,0.4)] border border-white/20 active:scale-95 transition-transform duration-200"
             >
-              <div className="flex items-center gap-3">
-                <div className="bg-white/20 w-8 h-8 rounded-full flex items-center justify-center font-black text-sm text-white">
-                  {totalQty}
-                </div>
-                <span className="font-black uppercase tracking-wider text-xs md:text-sm">
-                  View Your Order
-                </span>
+              <div className="w-full">
+                <button
+                  onClick={() => setIsCartOpen(true)}
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white p-4 rounded-full flex items-center justify-between shadow-[0_10px_35px_rgba(234,88,12,0.4)] border border-white/20 active:scale-95 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white/20 w-8 h-8 rounded-full flex items-center justify-center font-black text-sm text-white">
+                      {totalQty}
+                    </div>
+                    <span className="font-black uppercase tracking-wider text-xs md:text-sm">
+                      View Your Order
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-black text-sm md:text-base">
+                      {formatPrice(subtotal)} LL
+                    </span>
+                    <span className="text-lg">➔</span>
+                  </div>
+                </button>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="font-black text-sm md:text-base">
-                  {formatPrice(subtotal)} LL
-                </span>
-                <span className="text-lg">➔</span>
-              </div>
-            </motion.button>
+            </MotionDiv>
           ) : (
-            <motion.div
+            <MotionDiv
               key="cart-empty"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="w-full"
             >
-              <Link
-                href={
-                  "https://wa.me/70381621?text=" +
-                  encodeURIComponent("Hi Rando's! I'd like to place an order.")
-                }
-                target="_blank"
-                className="w-full bg-orange-600 hover:bg-orange-500 text-white p-4 rounded-full flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(234,88,12,0.5)] border border-white/20 text-center font-black uppercase tracking-wider text-xs md:text-sm whitespace-nowrap block"
-              >
-                <span className="text-xl">🔥</span>
-                <span>Order Now: 70 381 621</span>
-              </Link>
-            </motion.div>
+              <div className="w-full">
+                <Link
+                  href={
+                    "https://wa.me/70381621?text=" +
+                    encodeURIComponent("Hi Rando's! I'd like to place an order.")
+                  }
+                  target="_blank"
+                  className="w-full bg-orange-600 hover:bg-orange-500 text-white p-4 rounded-full flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(234,88,12,0.5)] border border-white/20 text-center font-black uppercase tracking-wider text-xs md:text-sm whitespace-nowrap block"
+                >
+                  <span className="text-xl">🔥</span>
+                  <span>Order Now: 70 381 621</span>
+                </Link>
+              </div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </div>
@@ -494,7 +502,7 @@ export default function Home() {
         {isCartOpen && (
           <>
             {/* Backdrop Blur overlay */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               exit={{ opacity: 0 }}
@@ -503,7 +511,7 @@ export default function Home() {
             />
 
             {/* Main Drawer Container */}
-            <motion.div
+            <MotionDiv
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -769,7 +777,7 @@ export default function Home() {
                   </button>
                 </div>
               )}
-            </motion.div>
+            </MotionDiv>
           </>
         )}
       </AnimatePresence>
@@ -779,7 +787,7 @@ export default function Home() {
         {noteItemName && (
           <>
             {/* Modal Backdrop overlay */}
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
@@ -792,7 +800,7 @@ export default function Home() {
 
             {/* Modal Content Box */}
             <div className="fixed inset-0 flex items-center justify-center p-4 z-50">
-              <motion.div
+              <MotionDiv
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.95, opacity: 0 }}
@@ -866,7 +874,7 @@ export default function Home() {
                     <Check size={12} className="stroke-[3]" /> Save Note
                   </button>
                 </div>
-              </motion.div>
+              </MotionDiv>
             </div>
           </>
         )}

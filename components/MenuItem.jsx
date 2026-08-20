@@ -10,9 +10,9 @@ const MenuItem = ({
   description,
   image,
   quantity = 0,
-  onAdd,
-  onRemove,
-  onEditNotes,
+  onAdd = undefined,
+  onRemove = undefined,
+  onEditNotes = undefined,
   hasNote = false,
 }) => {
   const isInteractive = typeof onAdd === "function";
