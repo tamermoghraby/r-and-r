@@ -10,7 +10,7 @@ export default async function Home() {
   const kaakeItems = [
     {
       name: "Double Cheese",
-      price: "220,000",
+      price: "250,000",
       description: "Mozzarella, Aakawi",
       image: "/assets/images/double-cheese.jpg",
     },
@@ -36,7 +36,7 @@ export default async function Home() {
     {
       name: "Ham & Cheese",
       price: "300,000",
-      description: "Ham, Mozzarella, Mustard, Oregano, Olives",
+      description: "Ham, Mozzarella, Mustard, Oregano",
       image: "/assets/images/ham-and-cheese.jpg",
     },
     {
@@ -62,7 +62,7 @@ export default async function Home() {
   const wrapItems = [
     {
       name: "Boneless Wrap",
-      price: "450,000",
+      price: "500,000",
       description:
         "Tortilla Wrap, Mozzarella, Iceberg, Sticks, Honey Mustard, Barbecue, Ranch Sauce, Cheddar Cheese",
       image: "/assets/images/boneless-new.jpg",
@@ -82,7 +82,7 @@ export default async function Home() {
     // },
     {
       name: "Burger Wrap",
-      price: "450,000",
+      price: "500,000",
       description:
         "Tortilla Wrap, 2 Burger patty, Fries, Mozzarella, Iceberg, Tomato, Kethup, Cocktail Sauce",
       image: "/assets/images/burger-new.jpg",
@@ -122,7 +122,7 @@ export default async function Home() {
     },
     {
       name: "Loaded Fries",
-      price: "450,000",
+      price: "500,000",
       description:
         "Fries, Chicken Strips, Barbecue Sauce, Ranch Sauce, Honey Mustard, Cheddar Cheese",
       image: "/assets/images/loaded-fries-new.jpg",
